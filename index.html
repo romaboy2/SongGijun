@@ -20,14 +20,12 @@
   html { scroll-behavior: smooth; }
   body { background: var(--ink); color: var(--cream); font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
 
-  /* NAV */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem; background: linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, transparent 100%); }
   .nav-logo { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--cream-dim); text-transform: uppercase; text-decoration: none; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream-dim); text-decoration: none; transition: color 0.3s; }
   .nav-links a:hover { color: var(--cream); }
 
-  /* HERO */
   #about { min-height: 100vh; display: grid; grid-template-rows: 1fr auto; padding: 0 3rem; position: relative; overflow: hidden; }
   .hero-bg-text { position: absolute; bottom: -0.15em; left: -0.02em; font-family: var(--serif); font-size: clamp(160px, 22vw, 320px); font-weight: 300; color: transparent; -webkit-text-stroke: 1px rgba(242,237,228,0.04); pointer-events: none; white-space: nowrap; line-height: 1; user-select: none; }
   .hero-content { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 5rem; padding-top: 10rem; position: relative; z-index: 1; }
@@ -41,7 +39,6 @@
   .scroll-line { width: 40px; height: 1px; background: var(--cream-dim); }
   .scroll-text { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--cream-dim); text-transform: uppercase; }
 
-  /* SECTION */
   section { padding: 8rem 3rem; position: relative; }
   .section-header { display: flex; align-items: baseline; gap: 2rem; margin-bottom: 5rem; }
   .section-num { font-family: var(--mono); font-size: 11px; color: var(--gold); letter-spacing: 0.1em; }
@@ -49,22 +46,23 @@
   h2.section-title em { font-style: italic; color: var(--gold); }
   .divider { width: 100%; height: 1px; background: var(--line); margin-bottom: 5rem; }
 
-  /* GALLERY */
   .gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
   .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
-  .gallery-item:nth-child(1) { grid-column: span 5; }
-  .gallery-item:nth-child(2) { grid-column: span 4; }
-  .gallery-item:nth-child(3) { grid-column: span 3; }
 
-  .gallery-thumb {
-    width: 100%; aspect-ratio: 3/4;
-    position: relative; overflow: hidden;
-  }
-  .gallery-bg {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
+  .gallery-item:nth-child(1) { grid-column: span 7; }
+  .gallery-item:nth-child(2) { grid-column: span 5; }
+  .gallery-item:nth-child(3) { grid-column: span 4; }
+  .gallery-item:nth-child(4) { grid-column: span 4; }
+  .gallery-item:nth-child(5) { grid-column: span 4; }
+  .gallery-item:nth-child(6) { grid-column: span 4; }
+  .gallery-item:nth-child(7) { grid-column: span 4; }
+  .gallery-item:nth-child(8) { grid-column: span 4; }
+
+  .gallery-thumb { width: 100%; aspect-ratio: 3/4; position: relative; overflow: hidden; }
+  .gallery-item:nth-child(1) .gallery-thumb,
+  .gallery-item:nth-child(2) .gallery-thumb { aspect-ratio: 4/3; }
+
+  .gallery-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .gallery-item:hover .gallery-bg { transform: scale(1.05); }
   .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.2) 60%, transparent 100%); opacity: 0; transition: opacity 0.4s; }
   .gallery-item:hover .gallery-overlay { opacity: 1; }
@@ -74,34 +72,28 @@
   .gallery-name { font-family: var(--serif); font-size: 26px; font-weight: 300; color: var(--cream); }
   .gallery-count { font-family: var(--mono); font-size: 10px; color: var(--cream-dim); margin-top: 0.25rem; }
 
-  /* LIGHTBOX */
   .lightbox { position: fixed; inset: 0; background: rgba(8,8,8,0.98); z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
   .lightbox.active { opacity: 1; pointer-events: all; }
-
   .lb-header { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2.5rem; z-index: 10; }
   .lb-title-wrap { display: flex; flex-direction: column; }
   .lb-project { font-family: var(--serif); font-size: 24px; font-weight: 300; color: var(--cream); }
   .lb-counter { font-family: var(--mono); font-size: 11px; color: var(--cream-dim); letter-spacing: 0.1em; margin-top: 0.2rem; }
   .lb-close { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-dim); background: none; border: 1px solid var(--line-hover); padding: 0.6rem 1.2rem; cursor: pointer; transition: all 0.2s; }
   .lb-close:hover { color: var(--cream); border-color: var(--cream-dim); }
-
   .lb-main { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; }
-  .lb-img-wrap { max-width: 90vw; max-height: 78vh; display: flex; align-items: center; justify-content: center; }
-  .lb-img-wrap img { max-width: 100%; max-height: 78vh; object-fit: contain; display: block; }
-
+  .lb-img-wrap { max-width: 90vw; max-height: 75vh; display: flex; align-items: center; justify-content: center; }
+  .lb-img-wrap img { max-width: 100%; max-height: 75vh; object-fit: contain; display: block; }
   .lb-btn { position: fixed; top: 50%; transform: translateY(-50%); background: none; border: 1px solid var(--line-hover); color: var(--cream-dim); font-family: var(--mono); font-size: 18px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; z-index: 10; }
   .lb-btn:hover { color: var(--cream); border-color: var(--cream-dim); background: rgba(242,237,228,0.05); }
   .lb-prev { left: 1.5rem; }
   .lb-next { right: 1.5rem; }
   .lb-btn:disabled { opacity: 0.2; cursor: default; }
-
-  .lb-strip { position: fixed; bottom: 0; left: 0; right: 0; display: flex; gap: 6px; padding: 1rem 2rem; overflow-x: auto; justify-content: center; background: linear-gradient(to top, rgba(8,8,8,0.9), transparent); scrollbar-width: none; }
+  .lb-strip { position: fixed; bottom: 0; left: 0; right: 0; display: flex; gap: 6px; padding: 1rem 2rem; overflow-x: auto; background: linear-gradient(to top, rgba(8,8,8,0.95), transparent); scrollbar-width: none; }
   .lb-strip::-webkit-scrollbar { display: none; }
   .lb-thumb { width: 60px; height: 45px; object-fit: cover; opacity: 0.4; cursor: pointer; transition: opacity 0.2s; flex-shrink: 0; border: 1px solid transparent; }
   .lb-thumb.active { opacity: 1; border-color: var(--gold); }
   .lb-thumb:hover { opacity: 0.8; }
 
-  /* CAREER */
   #career { background: var(--ink-2); }
   .timeline { position: relative; padding-left: 3rem; }
   .timeline::before { content: ''; position: absolute; left: 0; top: 0.5rem; bottom: 0; width: 1px; background: var(--line); }
@@ -114,7 +106,6 @@
   .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
   .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-dim); border: 1px solid var(--line-hover); padding: 0.3rem 0.7rem; }
 
-  /* CONTACT */
   #contact { background: var(--ink); min-height: 60vh; display: flex; flex-direction: column; justify-content: center; }
   .contact-inner { max-width: 680px; }
   .contact-big { font-family: var(--serif); font-size: clamp(52px, 7vw, 100px); font-weight: 300; line-height: 0.95; color: var(--cream); margin-bottom: 2.5rem; }
@@ -123,17 +114,13 @@
   .contact-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
   .btn-primary { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); background: var(--cream); border: 1px solid var(--cream); padding: 1rem 2rem; cursor: pointer; transition: all 0.3s; }
   .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
-  .btn-ghost { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-dim); background: transparent; border: 1px solid var(--line-hover); padding: 1rem 2rem; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
-  .btn-ghost:hover { color: var(--cream); border-color: var(--cream-dim); }
 
   footer { padding: 2.5rem 3rem; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
   .footer-text { font-family: var(--mono); font-size: 11px; color: var(--cream-dim); letter-spacing: 0.1em; }
 
-  /* TOAST */
   .toast { position: fixed; bottom: 2.5rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--cream); color: var(--ink); font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.9rem 2rem; opacity: 0; transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; z-index: 999; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  /* CURSOR */
   .cursor-dot { position: fixed; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%); z-index: 9999; }
   .cursor-ring { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(201,162,39,0.4); border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%); z-index: 9998; transition: width 0.3s, height 0.3s, border-color 0.3s; }
 
@@ -146,6 +133,7 @@
     section { padding: 5rem 1.5rem; }
     #about { padding: 0 1.5rem; }
     .gallery-item { grid-column: span 12 !important; }
+    .gallery-item .gallery-thumb { aspect-ratio: 4/3 !important; }
     footer { flex-direction: column; gap: 1rem; text-align: center; }
     .lb-btn { display: none; }
   }
@@ -157,7 +145,6 @@
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="toast" id="toast"></div>
 
-<!-- NAV -->
 <nav>
   <a href="#about" class="nav-logo">Song Gijun</a>
   <ul class="nav-links">
@@ -168,7 +155,6 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section id="about">
   <div class="hero-bg-text">DESIGN</div>
   <div class="hero-content">
@@ -186,7 +172,6 @@
   </div>
 </section>
 
-<!-- GALLERY -->
 <section id="work">
   <div class="section-header reveal">
     <span class="section-num">01</span>
@@ -207,6 +192,18 @@
       </div>
     </div>
 
+    <div class="gallery-item reveal" style="transition-delay:0.05s" data-project="Wagon">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/Wagon/Wagon07.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">3D · Vehicle</span>
+          <div class="gallery-name">Wagon</div>
+          <div class="gallery-count">35 images</div>
+        </div>
+      </div>
+    </div>
+
     <div class="gallery-item reveal" style="transition-delay:0.1s" data-project="Corridor">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/Corridor/Night01.png');"></div>
@@ -215,6 +212,18 @@
           <span class="gallery-tag">3D · Environment</span>
           <div class="gallery-name">Corridor</div>
           <div class="gallery-count">20 images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.15s" data-project="MegicDesk">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/MegicDesk/Thumbnail.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">3D · Environment</span>
+          <div class="gallery-name">Magic Desk</div>
+          <div class="gallery-count">37 images</div>
         </div>
       </div>
     </div>
@@ -231,10 +240,45 @@
       </div>
     </div>
 
+    <div class="gallery-item reveal" style="transition-delay:0.25s" data-project="SubstanceDesigner">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/SubstanceDesigner/Rock_A.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">Material · Substance</span>
+          <div class="gallery-name">Substance Designer</div>
+          <div class="gallery-count">20 images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.3s" data-project="Pillar">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/Pillar/Pillar_Main.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">3D · Props</span>
+          <div class="gallery-name">Pillar</div>
+          <div class="gallery-count">4 images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.35s" data-project="Tile">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/Tile/Tile01.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">3D · Material</span>
+          <div class="gallery-name">Tile</div>
+          <div class="gallery-count">6 images</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <div class="lb-header">
     <div class="lb-title-wrap">
@@ -253,7 +297,6 @@
   <div class="lb-strip" id="lbStrip"></div>
 </div>
 
-<!-- CAREER -->
 <section id="career">
   <div class="section-header reveal">
     <span class="section-num">02</span>
@@ -282,7 +325,6 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner">
     <div class="section-header reveal">
@@ -304,10 +346,8 @@
 <script>
   const EMAIL = 'your@email.com';
 
-  /* ── 프로젝트별 이미지 목록 ── */
   const PROJECTS = {
     Cannon: {
-      tag: '3D · Props',
       images: [
         'Thumbnail','Shot01','Shot02','Shot03','Shot04','Shot05','Shot06','Shot07',
         'Main05','Main06','Main07','Main08','Main09','Main10','Main11','Main12',
@@ -315,8 +355,16 @@
         'Zbrush01','Zbrush02','subpaint'
       ].map(n => `Images/Cannon/${n}.png`)
     },
+    Wagon: {
+      images: [
+        'Wagon01','Wagon02','Wagon03','Wagon04','Wagon05','Wagon06',
+        'Wagon07','Wagon08','Wagon09','Wagon10','Wagon11','Wagon12',
+        '1920_1080','1920_1080_2',
+        'W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12',
+        'WA01','WA02','WA03','WA04','WA05','WA06','WA07','WA08','WA09'
+      ].map(n => `Images/Wagon/${n}.png`)
+    },
     Corridor: {
-      tag: '3D · Environment',
       images: [
         'light01','light02','light03','light04','light05','light06','light07',
         'light08','light09','light10','Light11',
@@ -324,17 +372,52 @@
         'Night06','Night07','Night08','Night09'
       ].map(n => `Images/Corridor/${n}.png`)
     },
+    MegicDesk: {
+      images: [
+        'Thumbnail',
+        'Scene01','Scene02','Scene03','Scene04','Scene05','Scene06','Scene07','Scene08','Scene09',
+        'Desk01','Desk02','Desk03','Desk04','Desk05','Desk06','Desk07','Desk08','Desk09',
+        'Prop01','Prop02','Prop03','Prop04','Prop05','Prop06','Prop07','Prop08','Prop09','Prop10',
+        'Zbrush01','Zbrush02','Zbrush03','Zbrush04','Zbrush05','Zbrush06','Zbrush07','Zbrush08'
+      ].map(n => `Images/MegicDesk/${n}.png`)
+    },
     FirePlace: {
-      tag: '3D · Props',
       images: [
         'MainShot_Sunlight','MainShot_Night',
         'SunlightShot01','SunlightShot02','SunlightShot03','SunlightShot04','SunlightShot05',
         'NightShot01','NightShot02','NightShot03','NightShot04','NightShot05','NightShot06'
       ].map(n => `Images/FirePlace/${n}.png`)
+    },
+    SubstanceDesigner: {
+      images: [
+        'Rock_A','Rock_B01','Rock_B02','Wood','Metal',
+        'Chainmale','Fabric01','Fabric02','FabricMax',
+        'Sidewalk01','Sidewalk02','SidewalkMax',
+        'Tile','Tile02','Tree','Tree02',
+        'WetSoil01','WetSoil02','IceAge','Sofa'
+      ].map(n => `Images/SubstanceDesigner/${n}.png`)
+    },
+    Pillar: {
+      images: ['Pillar_Main','Main','Main02','Shot02']
+        .map(n => `Images/Pillar/${n}.png`)
+    },
+    Tile: {
+      images: ['Tile01','Tile02','Tilling01','Tilling02','Tile01_Zbrush','Tile02_Zbrush']
+        .map(n => `Images/Tile/${n}.png`)
     }
   };
 
-  /* ── 라이트박스 ── */
+  const PROJECT_LABELS = {
+    Cannon: 'Cannon',
+    Wagon: 'Wagon',
+    Corridor: 'Corridor',
+    MegicDesk: 'Magic Desk',
+    FirePlace: 'FirePlace',
+    SubstanceDesigner: 'Substance Designer',
+    Pillar: 'Pillar',
+    Tile: 'Tile'
+  };
+
   let curImages = [], curIdx = 0;
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
@@ -349,7 +432,7 @@
     if (!proj) return;
     curImages = proj.images;
     curIdx = 0;
-    lbProject.textContent = projectName;
+    lbProject.textContent = PROJECT_LABELS[projectName] || projectName;
     lbStrip.innerHTML = curImages.map((src, i) =>
       `<img class="lb-thumb${i === 0 ? ' active' : ''}" src="${src}" data-i="${i}" alt="">`
     ).join('');
@@ -395,14 +478,12 @@
     if (e.key === 'ArrowRight') goTo(curIdx + 1);
   });
 
-  /* ── 이메일 복사 ── */
   const toast = document.getElementById('toast');
   function showToast(msg) { toast.textContent = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); }
   document.getElementById('emailBtn').addEventListener('click', () => {
     navigator.clipboard.writeText(EMAIL).then(() => showToast('이메일이 복사되었습니다 ✓'));
   });
 
-  /* ── 커서 ── */
   const dot = document.getElementById('cursorDot'), ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
   document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
@@ -412,7 +493,6 @@
     el.addEventListener('mouseleave', () => { ring.style.width='32px'; ring.style.height='32px'; ring.style.borderColor='rgba(201,162,39,0.4)'; });
   });
 
-  /* ── 스크롤 reveal ── */
   const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
   document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 </script>
