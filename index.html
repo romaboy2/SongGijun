@@ -56,6 +56,7 @@
   .hero-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
   h1.hero-name { font-family: var(--serif); font-size: clamp(64px, 9vw, 130px); font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; color: var(--cream); margin-bottom: 2rem; }
   h1.hero-name em { font-style: italic; color: var(--gold); }
+  h1.hero-name em.hero-role { font-size: clamp(28px, 4vw, 56px); display: inline-block; margin-top: 0.5rem; letter-spacing: 0; }
   .hero-bio { max-width: 480px; font-size: 15px; color: var(--cream-dim); line-height: 1.8; border-left: 1px solid var(--gold-dim); padding-left: 1.5rem; margin-bottom: 3rem; }
   .hero-cta { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream); text-decoration: none; border: 1px solid var(--line-hover); padding: 0.9rem 2rem; transition: all 0.3s; }
   .hero-cta:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
@@ -188,7 +189,7 @@
   <div class="hero-bg-text">DESIGN</div>
   <div class="hero-content">
     <p class="hero-label reveal">3D Visual Artist · Seoul, KR</p>
-    <h1 class="hero-name reveal" style="transition-delay:0.1s">Song Gijun<br><em>Artist</em></h1>
+    <h1 class="hero-name reveal" style="transition-delay:0.1s">Song Gijun<br><em class="hero-role">3D Environment Artist</em></h1>
     <p class="hero-bio reveal" style="transition-delay:0.2s">
       3D 모델링과 렌더링을 중심으로 사실적인 환경과 오브젝트를 제작하는 비주얼 아티스트입니다.
       ZBrush, Substance, Marmoset 기반의 하이퀄리티 작업을 추구합니다.
@@ -209,7 +210,19 @@
   <div class="divider"></div>
   <div class="gallery-grid">
 
-    <div class="gallery-item reveal" data-project="Cannon">
+    <div class="gallery-item reveal" data-project="MegicDesk">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/MegicDesk/Thumbnail.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">3D · Environment</span>
+          <div class="gallery-name">Magic Desk</div>
+          <div class="gallery-count">37 images · 1 gif</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.05s" data-project="Cannon">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/Cannon/Thumbnail.png');"></div>
         <div class="gallery-overlay"></div>
@@ -221,7 +234,7 @@
       </div>
     </div>
 
-    <div class="gallery-item reveal" style="transition-delay:0.05s" data-project="Wagon">
+    <div class="gallery-item reveal" style="transition-delay:0.1s" data-project="Wagon">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/Wagon/Wagon07.png');"></div>
         <div class="gallery-overlay"></div>
@@ -233,26 +246,14 @@
       </div>
     </div>
 
-    <div class="gallery-item reveal" style="transition-delay:0.1s" data-project="Corridor">
+    <div class="gallery-item reveal" style="transition-delay:0.15s" data-project="Pillar">
       <div class="gallery-thumb">
-        <div class="gallery-bg" style="background-image: url('Images/Corridor/Night01.png');"></div>
+        <div class="gallery-bg" style="background-image: url('Images/Pillar/Pillar_Main.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
-          <span class="gallery-tag">3D · Environment</span>
-          <div class="gallery-name">Corridor</div>
-          <div class="gallery-count">20 images</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="gallery-item reveal" style="transition-delay:0.15s" data-project="MegicDesk">
-      <div class="gallery-thumb">
-        <div class="gallery-bg" style="background-image: url('Images/MegicDesk/Thumbnail.png');"></div>
-        <div class="gallery-overlay"></div>
-        <div class="gallery-info">
-          <span class="gallery-tag">3D · Environment</span>
-          <div class="gallery-name">Magic Desk</div>
-          <div class="gallery-count">37 images · 1 gif</div>
+          <span class="gallery-tag">3D · Props</span>
+          <div class="gallery-name">Pillar</div>
+          <div class="gallery-count">4 images</div>
         </div>
       </div>
     </div>
@@ -269,7 +270,19 @@
       </div>
     </div>
 
-    <div class="gallery-item reveal" style="transition-delay:0.25s" data-project="SubstanceDesigner">
+    <div class="gallery-item reveal" style="transition-delay:0.25s" data-project="Corridor">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/Corridor/Night01.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">3D · Environment</span>
+          <div class="gallery-name">Corridor</div>
+          <div class="gallery-count">20 images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.3s" data-project="SubstanceDesigner">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/SubstanceDesigner/Rock_A.png');"></div>
         <div class="gallery-overlay"></div>
@@ -277,18 +290,6 @@
           <span class="gallery-tag">Material · Substance</span>
           <div class="gallery-name">Substance Designer</div>
           <div class="gallery-count">20 images</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="gallery-item reveal" style="transition-delay:0.3s" data-project="Pillar">
-      <div class="gallery-thumb">
-        <div class="gallery-bg" style="background-image: url('Images/Pillar/Pillar_Main.png');"></div>
-        <div class="gallery-overlay"></div>
-        <div class="gallery-info">
-          <span class="gallery-tag">3D · Props</span>
-          <div class="gallery-name">Pillar</div>
-          <div class="gallery-count">4 images</div>
         </div>
       </div>
     </div>
