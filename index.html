@@ -27,7 +27,31 @@
   .nav-links a:hover { color: var(--cream); }
 
   #about { min-height: 100vh; display: grid; grid-template-rows: 1fr auto; padding: 0 3rem; position: relative; overflow: hidden; }
-  .hero-bg-text { position: absolute; bottom: -0.15em; left: -0.02em; font-family: var(--serif); font-size: clamp(160px, 22vw, 320px); font-weight: 300; color: transparent; -webkit-text-stroke: 1px rgba(242,237,228,0.04); pointer-events: none; white-space: nowrap; line-height: 1; user-select: none; }
+
+  /* Video background */
+  .hero-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.45;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.6) 60%, rgba(8,8,8,0.4) 100%);
+    z-index: 1;
+  }
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(8,8,8,0.6) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-bg-text { position: absolute; bottom: -0.15em; left: -0.02em; font-family: var(--serif); font-size: clamp(160px, 22vw, 320px); font-weight: 300; color: transparent; -webkit-text-stroke: 1px rgba(242,237,228,0.04); pointer-events: none; white-space: nowrap; line-height: 1; user-select: none; z-index: 1; }
   .hero-content { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 5rem; padding-top: 10rem; position: relative; z-index: 1; }
   .hero-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
   h1.hero-name { font-family: var(--serif); font-size: clamp(64px, 9vw, 130px); font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; color: var(--cream); margin-bottom: 2rem; }
@@ -156,10 +180,15 @@
 </nav>
 
 <section id="about">
+  <video class="hero-video" autoplay muted playsinline poster="Images/Wagon/Wagon07.png" id="heroVideo">
+    <source src="Videos/Medieval_Ani.mp4" type="video/mp4" id="heroSource">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
   <div class="hero-bg-text">DESIGN</div>
   <div class="hero-content">
     <p class="hero-label reveal">3D Visual Artist · Seoul, KR</p>
-    <h1 class="hero-name reveal" style="transition-delay:0.1s">송기준<br><em>Artist</em></h1>
+    <h1 class="hero-name reveal" style="transition-delay:0.1s">Song Gijun<br><em>Artist</em></h1>
     <p class="hero-bio reveal" style="transition-delay:0.2s">
       3D 모델링과 렌더링을 중심으로 사실적인 환경과 오브젝트를 제작하는 비주얼 아티스트입니다.
       ZBrush, Substance, Marmoset 기반의 하이퀄리티 작업을 추구합니다.
@@ -339,7 +368,7 @@
 </section>
 
 <footer>
-  <div class="footer-text">© 2024 송기준. All rights reserved.</div>
+  <div class="footer-text">© 2024 Song Gijun. All rights reserved.</div>
   <div class="footer-text">3D Visual Artist · Seoul, KR</div>
 </footer>
 
@@ -504,6 +533,23 @@
 
   const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
   document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+  /* ── 비디오 순차 재생 ── */
+  const VIDEOS = [
+    'Videos/Medieval_Ani.mp4',
+    'Videos/MegicDesk.mp4',
+    'Videos/Sequence_Ani.mp4'
+  ];
+  let videoIdx = 0;
+  const heroVideo = document.getElementById('heroVideo');
+  const heroSource = document.getElementById('heroSource');
+
+  heroVideo.addEventListener('ended', () => {
+    videoIdx = (videoIdx + 1) % VIDEOS.length;
+    heroSource.src = VIDEOS[videoIdx];
+    heroVideo.load();
+    heroVideo.play().catch(() => {});
+  });
 </script>
 </body>
 </html>
