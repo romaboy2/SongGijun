@@ -71,22 +71,21 @@
   h2.section-title em { font-style: italic; color: var(--gold); }
   .divider { width: 100%; height: 1px; background: var(--line); margin-bottom: 5rem; }
 
-  .gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
   .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
 
-  .gallery-item:nth-child(1) { grid-column: span 7; }
-  .gallery-item:nth-child(2) { grid-column: span 5; }
+  /* All cards uniform 4-column layout — 3 cards per row, 3 rows */
+  .gallery-item:nth-child(1) { grid-column: span 4; }
+  .gallery-item:nth-child(2) { grid-column: span 4; }
   .gallery-item:nth-child(3) { grid-column: span 4; }
   .gallery-item:nth-child(4) { grid-column: span 4; }
   .gallery-item:nth-child(5) { grid-column: span 4; }
-  .gallery-item:nth-child(6) { grid-column: span 3; }
-  .gallery-item:nth-child(7) { grid-column: span 3; }
-  .gallery-item:nth-child(8) { grid-column: span 3; }
-  .gallery-item:nth-child(9) { grid-column: span 3; }
+  .gallery-item:nth-child(6) { grid-column: span 4; }
+  .gallery-item:nth-child(7) { grid-column: span 4; }
+  .gallery-item:nth-child(8) { grid-column: span 4; }
+  .gallery-item:nth-child(9) { grid-column: span 4; }
 
-  .gallery-thumb { width: 100%; aspect-ratio: 3/4; position: relative; overflow: hidden; }
-  .gallery-item:nth-child(1) .gallery-thumb,
-  .gallery-item:nth-child(2) .gallery-thumb { aspect-ratio: 4/3; }
+  .gallery-thumb { width: 100%; aspect-ratio: 4/3; position: relative; overflow: hidden; }
 
   .gallery-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .gallery-bg-hover { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
@@ -97,7 +96,7 @@
   .gallery-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; z-index: 2; opacity: 0; transform: translateY(8px); transition: all 0.4s; }
   .gallery-item:hover .gallery-info { opacity: 1; transform: translateY(0); }
   .gallery-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem; }
-  .gallery-name { font-family: var(--serif); font-size: 26px; font-weight: 300; color: var(--cream); }
+  .gallery-name { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--cream); }
   .gallery-count { font-family: var(--mono); font-size: 10px; color: var(--cream-dim); margin-top: 0.25rem; }
 
   .lightbox { position: fixed; inset: 0; background: rgba(8,8,8,0.98); z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
@@ -193,11 +192,7 @@
   <div class="hero-content">
     <p class="hero-label reveal">3D Visual Artist · Seoul, KR</p>
     <h1 class="hero-name reveal" style="transition-delay:0.1s">Song Gijun<br><em class="hero-role">3D Environment Artist</em></h1>
-    <p class="hero-bio reveal" style="transition-delay:0.2s">
-      3D 모델링과 렌더링을 중심으로 사실적인 환경과 오브젝트를 제작하는 비주얼 아티스트입니다.
-      ZBrush, Substance, Marmoset 기반의 하이퀄리티 작업을 추구합니다.
-    </p>
-    <a href="#work" class="hero-cta reveal" style="transition-delay:0.3s">Works 보기 →</a>
+    <a href="#work" class="hero-cta reveal" style="transition-delay:0.2s">Works 보기 →</a>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
