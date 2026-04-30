@@ -163,6 +163,77 @@
     cursor: default;
   }
 
+  /* About Me section */
+  #aboutme {
+    background: var(--ink);
+  }
+  .aboutme-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .aboutme-photo {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--line);
+  }
+  .aboutme-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 1s ease;
+    filter: saturate(0.95);
+  }
+  .aboutme-photo:hover img { transform: scale(1.04); }
+  .aboutme-content { padding-top: 1rem; }
+  .aboutme-intro {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--cream);
+    margin-bottom: 3rem;
+    letter-spacing: 0.01em;
+  }
+  .aboutme-block { margin-bottom: 2.5rem; }
+  .aboutme-heading {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.85rem;
+    font-weight: 400;
+  }
+  .aboutme-text {
+    font-size: 15px;
+    color: var(--cream);
+    line-height: 1.7;
+  }
+  .aboutme-text .muted { color: var(--cream-dim); font-size: 13px; }
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    border: 1px solid var(--line-hover);
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    color: var(--ink);
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
   /* University Works - 5 columns, more compact than Personal */
   .university-grid {
     grid-template-columns: repeat(5, 1fr);
@@ -334,6 +405,8 @@
     .university-grid { grid-template-columns: repeat(3, 1fr); }
     .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
     .gallery-item:nth-child(1) .gallery-thumb { aspect-ratio: 16/9; }
+    .aboutme-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .aboutme-photo { max-width: 320px; aspect-ratio: 4/5; margin: 0 auto; }
     footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
     .lb-btn { display: none; }
 
@@ -359,7 +432,8 @@
 <nav>
   <a href="#about" class="nav-logo">Song Gijun</a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
+    <li><a href="#about">Home</a></li>
+    <li><a href="#aboutme">About</a></li>
     <li><a href="#work">Personal</a></li>
     <li><a href="#university">University</a></li>
   </ul>
@@ -374,7 +448,6 @@
   <div class="hero-bg-text">DESIGN</div>
   <div class="hero-content">
     <h1 class="hero-name reveal" style="transition-delay:0.1s">Song Gijun<br><em class="hero-role">3D Environment Artist</em></h1>
-    <p class="hero-edu reveal" style="transition-delay:0.15s">전주대학교 게임콘텐츠학과 졸업 · 2017.03 — 2024.02</p>
     <div class="hero-actions reveal" style="transition-delay:0.2s">
       <a href="#work" class="hero-cta">Personal Works 보기 →</a>
       <button class="hero-cta hero-cta-ghost" id="emailBtn">이메일 복사 ✉</button>
@@ -386,9 +459,48 @@
   </div>
 </section>
 
-<section id="work">
+<section id="aboutme">
   <div class="section-header reveal">
     <span class="section-num">01</span>
+    <h2 class="section-title">About <em>Me</em></h2>
+  </div>
+  <div class="divider"></div>
+
+  <div class="aboutme-grid">
+    <div class="aboutme-photo reveal">
+      <img src="Images/profile.jpg" alt="Song Gijun" />
+    </div>
+    <div class="aboutme-content reveal" style="transition-delay:0.1s">
+      <p class="aboutme-intro">
+        안녕하세요. 3D 환경 아티스트 송기준입니다.<br>
+        사실적이고 분위기 있는 환경과 오브젝트를 제작하는 것에 흥미를 느끼고 있으며,
+        디테일 있는 모델링과 텍스처링을 통해 작품의 완성도를 높이는 작업을 즐깁니다.
+      </p>
+
+      <div class="aboutme-block">
+        <h3 class="aboutme-heading">Education</h3>
+        <p class="aboutme-text">전주대학교 게임콘텐츠학과 졸업<br><span class="muted">2017.03 — 2024.02</span></p>
+      </div>
+
+      <div class="aboutme-block">
+        <h3 class="aboutme-heading">Skills</h3>
+        <div class="skill-list">
+          <span class="skill-tag">3ds Max</span>
+          <span class="skill-tag">ZBrush</span>
+          <span class="skill-tag">Substance Painter</span>
+          <span class="skill-tag">Substance Designer</span>
+          <span class="skill-tag">Gaea</span>
+          <span class="skill-tag">Unity</span>
+          <span class="skill-tag">Unreal Engine</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
     <h2 class="section-title">Personal <em>Works</em></h2>
   </div>
   <div class="divider"></div>
@@ -516,7 +628,7 @@
 
 <section id="university">
   <div class="section-header reveal">
-    <span class="section-num">02</span>
+    <span class="section-num">03</span>
     <h2 class="section-title">University <em>Works</em></h2>
   </div>
   <div class="divider"></div>
