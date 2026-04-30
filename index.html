@@ -119,6 +119,42 @@
   .gallery-name { font-family: var(--serif); font-size: 20px; font-weight: 300; color: var(--cream); }
   .gallery-item:nth-child(1) .gallery-name { font-size: 28px; }
 
+  /* Video play icon overlay */
+  .play-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: rgba(8,8,8,0.7);
+    border: 1px solid rgba(242,237,228,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream);
+    font-size: 18px;
+    padding-left: 4px;
+    z-index: 2;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  .gallery-item:hover .play-icon {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  /* Lightbox iframe for YouTube */
+  .lb-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    max-height: 80vh;
+    border: none;
+    display: block;
+  }
+
   /* University Works - 5 columns, more compact than Personal */
   .university-grid {
     grid-template-columns: repeat(5, 1fr);
@@ -544,6 +580,34 @@
       </div>
     </div>
 
+    <div class="gallery-item reveal" style="transition-delay:0.22s" data-project="UnrealStudy_2208" data-video="true">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('https://img.youtube.com/vi/sCM4Xr6aMog/maxresdefault.jpg');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('https://img.youtube.com/vi/sCM4Xr6aMog/hqdefault.jpg');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="play-icon">▶</div>
+        <div class="gallery-info">
+          <span class="gallery-tag">2022.08 · Video</span>
+          <div class="gallery-name">Unreal Study</div>
+          <div class="gallery-count">YouTube</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.24s" data-project="UnrealStudy_2210" data-video="true">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('https://img.youtube.com/vi/lQDZJN7SXUQ/maxresdefault.jpg');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('https://img.youtube.com/vi/lQDZJN7SXUQ/hqdefault.jpg');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="play-icon">▶</div>
+        <div class="gallery-info">
+          <span class="gallery-tag">2022.10 · Video</span>
+          <div class="gallery-name">Unreal Study</div>
+          <div class="gallery-count">YouTube</div>
+        </div>
+      </div>
+    </div>
+
     <div class="gallery-item reveal" style="transition-delay:0.25s" data-project="FairyHouse">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/University/2023.07_FairyHouse/FairyHouse02.png');"></div>
@@ -572,6 +636,7 @@
     <button class="lb-btn lb-prev" id="lbPrev">←</button>
     <div class="lb-img-wrap">
       <img id="lbImg" src="" alt="">
+      <iframe id="lbIframe" class="lb-video" style="display:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <button class="lb-btn lb-next" id="lbNext">→</button>
   </div>
@@ -692,6 +757,16 @@
     FairyHouse: {
       images: ['FairyHouse01','FairyHouse02','FairyHouse03','Gaea']
         .map(n => `Images/University/2023.07_FairyHouse/${n}.png`)
+    },
+
+    /* YouTube videos */
+    UnrealStudy_2208: {
+      youtube: 'sCM4Xr6aMog',
+      images: []
+    },
+    UnrealStudy_2210: {
+      youtube: 'lQDZJN7SXUQ',
+      images: []
     }
   };
 
@@ -710,7 +785,9 @@
     Battlecrusier: 'Battlecrusier (2021.12)',
     UniPillar: 'Pillar (2022.04)',
     Slaveship: 'Slaveship (2022.08)',
-    FairyHouse: 'Fairy House (2023.07)'
+    FairyHouse: 'Fairy House (2023.07)',
+    UnrealStudy_2208: 'Unreal Study (2022.08)',
+    UnrealStudy_2210: 'Unreal Study (2022.10)'
   };
 
   let curImages = [], curIdx = 0;
@@ -725,6 +802,32 @@
   function openLightbox(projectName) {
     const proj = PROJECTS[projectName];
     if (!proj) return;
+    const lbIframe = document.getElementById('lbIframe');
+    const lbImgEl = document.getElementById('lbImg');
+
+    // YouTube video project
+    if (proj.youtube) {
+      curImages = [];
+      curIdx = 0;
+      lbProject.textContent = PROJECT_LABELS[projectName] || projectName;
+      lbCounter.textContent = 'Video';
+      lbImgEl.style.display = 'none';
+      lbIframe.style.display = 'block';
+      lbIframe.src = `https://www.youtube.com/embed/${proj.youtube}?autoplay=1&rel=0`;
+      lbStrip.innerHTML = '';
+      lbPrev.style.display = 'none';
+      lbNext.style.display = 'none';
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+
+    // Regular image gallery
+    lbIframe.style.display = 'none';
+    lbIframe.src = '';
+    lbImgEl.style.display = 'block';
+    lbPrev.style.display = '';
+    lbNext.style.display = '';
     curImages = proj.images;
     curIdx = 0;
     lbProject.textContent = PROJECT_LABELS[projectName] || projectName;
@@ -737,6 +840,14 @@
     updateLb();
     lb.classList.add('active');
     document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+    // Stop video playback
+    const lbIframe = document.getElementById('lbIframe');
+    if (lbIframe) lbIframe.src = '';
   }
 
   function goTo(i) {
@@ -752,11 +863,6 @@
     lbStrip.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === curIdx));
     const activeThumb = lbStrip.querySelector('.lb-thumb.active');
     if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-  }
-
-  function closeLightbox() {
-    lb.classList.remove('active');
-    document.body.style.overflow = '';
   }
 
   document.querySelectorAll('.gallery-item').forEach(item => {
