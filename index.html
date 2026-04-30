@@ -68,8 +68,11 @@
     border-left: 1px solid var(--gold-dim);
   }
   .hero-bio { max-width: 480px; font-size: 15px; color: var(--cream-dim); line-height: 1.8; border-left: 1px solid var(--gold-dim); padding-left: 1.5rem; margin-bottom: 3rem; }
-  .hero-cta { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream); text-decoration: none; border: 1px solid var(--line-hover); padding: 0.9rem 2rem; transition: all 0.3s; }
+  .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream); text-decoration: none; border: 1px solid var(--line-hover); padding: 0.9rem 2rem; transition: all 0.3s; cursor: pointer; background: transparent; }
   .hero-cta:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+  .hero-cta-ghost { color: var(--cream-dim); }
+  .hero-cta-ghost:hover { color: var(--ink); background: var(--gold); border-color: var(--gold); }
   .hero-scroll { display: flex; align-items: center; gap: 1rem; padding-bottom: 2.5rem; position: relative; z-index: 1; }
   .scroll-line { width: 40px; height: 1px; background: var(--cream-dim); }
   .scroll-text { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--cream-dim); text-transform: uppercase; }
@@ -246,44 +249,7 @@
   footer {
     border-top: 1px solid var(--line);
     background: var(--ink);
-  }
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 3rem;
-    padding: 4rem 3rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .footer-heading {
-    font-family: var(--serif);
-    font-size: clamp(32px, 4vw, 48px);
-    font-weight: 300;
-    line-height: 1.1;
-    color: var(--cream);
-    margin-bottom: 0.6rem;
-  }
-  .footer-heading em { font-style: italic; color: var(--gold); }
-  .footer-sub {
-    font-size: 14px;
-    color: var(--cream-dim);
-    line-height: 1.6;
-  }
-  .footer-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.75rem;
-    flex-shrink: 0;
-  }
-  .footer-email {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--cream-dim);
-    letter-spacing: 0.1em;
-  }
-  .footer-bottom {
-    padding: 1.5rem 3rem;
+    padding: 2.5rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -308,9 +274,7 @@
     .university-grid { grid-template-columns: repeat(3, 1fr); }
     .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
     .gallery-item:nth-child(1) .gallery-thumb { aspect-ratio: 16/9; }
-    footer .footer-inner { flex-direction: column; align-items: flex-start; gap: 2rem; padding: 3rem 1.5rem; }
-    footer .footer-right { align-items: flex-start; }
-    footer .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; padding: 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
     .lb-btn { display: none; }
 
     /* Mobile: bring thumbnails back to bottom */
@@ -338,7 +302,6 @@
     <li><a href="#about">About</a></li>
     <li><a href="#work">Personal</a></li>
     <li><a href="#university">University</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -353,7 +316,10 @@
     <p class="hero-label reveal">3D Visual Artist</p>
     <h1 class="hero-name reveal" style="transition-delay:0.1s">Song Gijun<br><em class="hero-role">3D Environment Artist</em></h1>
     <p class="hero-edu reveal" style="transition-delay:0.15s">전주대학교 게임콘텐츠학과 졸업 · 2017.03 — 2024.02</p>
-    <a href="#work" class="hero-cta reveal" style="transition-delay:0.2s">Personal Works 보기 →</a>
+    <div class="hero-actions reveal" style="transition-delay:0.2s">
+      <a href="#work" class="hero-cta">Personal Works 보기 →</a>
+      <button class="hero-cta hero-cta-ghost" id="emailBtn">이메일 복사 ✉</button>
+    </div>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
@@ -595,21 +561,9 @@
   <div class="lb-strip" id="lbStrip"></div>
 </div>
 
-<footer id="contact">
-  <div class="footer-inner">
-    <div class="footer-left">
-      <h3 class="footer-heading">Let's <em>Work</em> Together</h3>
-      <p class="footer-sub">새로운 프로젝트나 협업 제안은 언제든지 환영합니다.</p>
-    </div>
-    <div class="footer-right">
-      <button class="btn-primary" id="emailBtn">이메일 복사 ✉</button>
-      <p class="footer-email">sgj0616@naver.com</p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-text">© 2024 Song Gijun. All rights reserved.</div>
-    <div class="footer-text">3D Environment Artist</div>
-  </div>
+<footer>
+  <div class="footer-text">© 2024 Song Gijun. All rights reserved.</div>
+  <div class="footer-text">3D Environment Artist · sgj0616@naver.com</div>
 </footer>
 
 <script>
