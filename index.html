@@ -115,6 +115,25 @@
   .gallery-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem; }
   .gallery-name { font-family: var(--serif); font-size: 20px; font-weight: 300; color: var(--cream); }
   .gallery-item:nth-child(1) .gallery-name { font-size: 28px; }
+
+  /* University Works - all cards uniform 1x1, no spotlight */
+  .university-grid .gallery-item:nth-child(1) {
+    grid-column: span 1;
+    grid-row: span 1;
+    aspect-ratio: 1 / 1;
+  }
+  .university-grid .gallery-item:nth-child(1) .gallery-name { font-size: 20px; }
+
+  .empty-msg {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--cream-dim);
+    padding: 4rem 1rem;
+    border: 1px dashed var(--line-hover);
+    margin-top: 1rem;
+  }
   .gallery-count { font-family: var(--mono); font-size: 10px; color: var(--cream-dim); margin-top: 0.25rem; }
 
   .latest-badge {
@@ -267,7 +286,8 @@
   <a href="#about" class="nav-logo">Song Gijun</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#work">Works</a></li>
+    <li><a href="#work">Personal</a></li>
+    <li><a href="#university">University</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -418,6 +438,95 @@
   </div>
 </section>
 
+<section id="university">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">University <em>Works</em></h2>
+  </div>
+  <div class="divider"></div>
+  <div class="gallery-grid university-grid">
+
+    <div class="gallery-item reveal" data-project="House">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/University/2020.05_House/House01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/University/2020.05_House/House02.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">2020.05 · House</span>
+          <div class="gallery-name">House</div>
+          <div class="gallery-count">2 images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.05s" data-project="Ruin">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/University/2020.09_Ruin/Ruin01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/University/2020.09_Ruin/Ruin02.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">2020.09 · Environment</span>
+          <div class="gallery-name">Ruin</div>
+          <div class="gallery-count">4 images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.1s" data-project="Battlecrusier">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/University/2021.12_Battlecrusier/Battlecrusier01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/University/2021.12_Battlecrusier/Battlecrusier02.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">2021.12 · Vehicle</span>
+          <div class="gallery-name">Battlecrusier</div>
+          <div class="gallery-count">4 images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.15s" data-project="UniPillar">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/University/2022.04_Pillar/Pillar01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/University/2022.04_Pillar/Pillar02.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">2022.04 · Props</span>
+          <div class="gallery-name">Pillar</div>
+          <div class="gallery-count">2 images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.2s" data-project="Slaveship">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/University/2022.08_Slaveship/Slaveship01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/University/2022.08_Slaveship/Slaveship02.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">2022.08 · Vehicle</span>
+          <div class="gallery-name">Slaveship</div>
+          <div class="gallery-count">3 images</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.25s" data-project="FairyHouse">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/University/2023.07_FairyHouse/FairyHouse01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/University/2023.07_FairyHouse/FairyHouse02.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">2023.07 · Environment</span>
+          <div class="gallery-name">Fairy House</div>
+          <div class="gallery-count">4 images</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <div class="lightbox" id="lightbox">
   <div class="lb-header">
     <div class="lb-title-wrap">
@@ -439,7 +548,7 @@
 <section id="contact">
   <div class="contact-inner">
     <div class="section-header reveal">
-      <span class="section-num">02</span>
+      <span class="section-num">03</span>
     </div>
     <h2 class="contact-big reveal">Let's <em>Work</em><br>Together</h2>
     <p class="contact-desc reveal" style="transition-delay:0.1s">새로운 프로젝트나 협업 제안은 언제든지 환영합니다.</p>
@@ -537,6 +646,32 @@
     Tile: {
       images: ['Tile01','Tile02','Tilling01','Tilling02','Tile01_Zbrush','Tile02_Zbrush']
         .map(n => `Images/Tile/${n}.png`)
+    },
+
+    /* University Works */
+    House: {
+      images: ['House01','House02']
+        .map(n => `Images/University/2020.05_House/${n}.png`)
+    },
+    Ruin: {
+      images: ['Ruin01','Ruin02','Ruin03','Ruin04']
+        .map(n => `Images/University/2020.09_Ruin/${n}.png`)
+    },
+    Battlecrusier: {
+      images: ['Battlecrusier01','Battlecrusier02','Battlecrusier03','Battlecrusier04']
+        .map(n => `Images/University/2021.12_Battlecrusier/${n}.png`)
+    },
+    UniPillar: {
+      images: ['Pillar01','Pillar02']
+        .map(n => `Images/University/2022.04_Pillar/${n}.png`)
+    },
+    Slaveship: {
+      images: ['Slaveship01','Slaveship02','Slaveship03']
+        .map(n => `Images/University/2022.08_Slaveship/${n}.png`)
+    },
+    FairyHouse: {
+      images: ['FairyHouse01','FairyHouse02','FairyHouse03','Gaea']
+        .map(n => `Images/University/2023.07_FairyHouse/${n}.png`)
     }
   };
 
@@ -549,7 +684,13 @@
     SubstanceDesigner: 'Substance Designer',
     Pillar: 'Pillar',
     Rock: 'Rock',
-    Tile: 'Tile'
+    Tile: 'Tile',
+    House: 'House (2020.05)',
+    Ruin: 'Ruin (2020.09)',
+    Battlecrusier: 'Battlecrusier (2021.12)',
+    UniPillar: 'Pillar (2022.04)',
+    Slaveship: 'Slaveship (2022.08)',
+    FairyHouse: 'Fairy House (2023.07)'
   };
 
   let curImages = [], curIdx = 0;
