@@ -89,7 +89,9 @@
   .gallery-item:nth-child(2) .gallery-thumb { aspect-ratio: 4/3; }
 
   .gallery-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .gallery-bg-hover { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .gallery-item:hover .gallery-bg { transform: scale(1.05); }
+  .gallery-item:hover .gallery-bg-hover { opacity: 1; transform: scale(1.05); }
   .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.2) 60%, transparent 100%); opacity: 0; transition: opacity 0.4s; }
   .gallery-item:hover .gallery-overlay { opacity: 1; }
   .gallery-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; z-index: 2; opacity: 0; transform: translateY(8px); transition: all 0.4s; }
@@ -214,6 +216,7 @@
     <div class="gallery-item reveal" data-project="MegicDesk">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/MegicDesk/Scene08.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/MegicDesk/Scene03.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Environment</span>
@@ -226,6 +229,7 @@
     <div class="gallery-item reveal" style="transition-delay:0.05s" data-project="Cannon">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/Cannon/Shot02.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/Cannon/Shot04.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Props</span>
@@ -238,6 +242,7 @@
     <div class="gallery-item reveal" style="transition-delay:0.1s" data-project="Wagon">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/Wagon/Wagon01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/Wagon/Wagon10.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Vehicle</span>
@@ -250,6 +255,7 @@
     <div class="gallery-item reveal" style="transition-delay:0.15s" data-project="Pillar">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/Pillar/Pillar_Main.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/Pillar/Main.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Props</span>
@@ -262,6 +268,7 @@
     <div class="gallery-item reveal" style="transition-delay:0.18s" data-project="Rock">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/Rock/Rock_C_Main_Light.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/Rock/Rock_C_Main_Dark.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Props</span>
@@ -274,6 +281,7 @@
     <div class="gallery-item reveal" style="transition-delay:0.2s" data-project="FirePlace">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/FirePlace/MainShot_Sunlight.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/FirePlace/Mainshot_Night.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Props</span>
@@ -286,6 +294,7 @@
     <div class="gallery-item reveal" style="transition-delay:0.25s" data-project="Corridor">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/Corridor/Light11.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/Corridor/Night02.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Environment</span>
@@ -309,7 +318,8 @@
 
     <div class="gallery-item reveal" style="transition-delay:0.35s" data-project="Tile">
       <div class="gallery-thumb">
-        <div class="gallery-bg" style="background-image: url('Images/Tile/Tile01.png');"></div>
+        <div class="gallery-bg" style="background-image: url('Images/Tile/Tilling01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/Tile/Tilling02.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Material</span>
