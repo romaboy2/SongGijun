@@ -588,16 +588,16 @@
       </div>
     </div>
 
-    <div class="gallery-item reveal" style="transition-delay:0.22s" data-project="UnrealStudy_2208" data-video="true">
+    <div class="gallery-item reveal" style="transition-delay:0.22s" data-project="UnrealStudy_2208">
       <div class="gallery-thumb">
-        <div class="gallery-bg" style="background-image: url('https://img.youtube.com/vi/sCM4Xr6aMog/maxresdefault.jpg');"></div>
-        <div class="gallery-bg-hover" style="background-image: url('https://img.youtube.com/vi/sCM4Xr6aMog/hqdefault.jpg');"></div>
+        <div class="gallery-bg" style="background-image: url('Images/University/2022.08_UnrealStudy/FloatingNode01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/University/2022.08_UnrealStudy/MakeStarNode.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="play-icon">▶</div>
         <div class="gallery-info">
-          <span class="gallery-tag">2022.08 · Video</span>
+          <span class="gallery-tag">2022.08 · Unreal</span>
           <div class="gallery-name">Unreal Study</div>
-          <div class="gallery-count">YouTube</div>
+          <div class="gallery-count">3 images · video</div>
         </div>
       </div>
     </div>
@@ -769,8 +769,12 @@
 
     /* YouTube videos */
     UnrealStudy_2208: {
-      youtube: 'sCM4Xr6aMog',
-      images: []
+      images: [
+        'Images/University/2022.08_UnrealStudy/FloatingNode01.png',
+        'Images/University/2022.08_UnrealStudy/FloatingNode02.png',
+        'Images/University/2022.08_UnrealStudy/MakeStarNode.png'
+      ],
+      youtube: 'sCM4Xr6aMog'
     },
     UnrealStudy_2210: {
       youtube: 'lQDZJN7SXUQ',
@@ -812,41 +816,34 @@
     if (!proj) return;
     const lbIframe = document.getElementById('lbIframe');
     const lbImgEl = document.getElementById('lbImg');
+    const lbImgWrap = document.querySelector('.lb-img-wrap');
 
-    // YouTube video project
-    if (proj.youtube) {
-      curImages = [];
-      curIdx = 0;
-      lbProject.textContent = PROJECT_LABELS[projectName] || projectName;
-      lbCounter.textContent = 'Video';
-      lbImgEl.style.display = 'none';
-      lbIframe.style.display = 'block';
-      lbIframe.src = `https://www.youtube.com/embed/${proj.youtube}?autoplay=1&rel=0`;
-      document.querySelector('.lb-img-wrap').classList.add('video-mode');
-      lbStrip.innerHTML = '';
-      lbPrev.style.display = 'none';
-      lbNext.style.display = 'none';
-      lb.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      return;
-    }
+    // Build slide list: video first (if present), then images
+    const slides = [];
+    if (proj.youtube) slides.push({ type: 'video', src: proj.youtube });
+    if (proj.images) proj.images.forEach(src => slides.push({ type: 'image', src }));
 
-    // Regular image gallery
-    document.querySelector('.lb-img-wrap').classList.remove('video-mode');
-    lbIframe.style.display = 'none';
-    lbIframe.src = '';
-    lbImgEl.style.display = 'block';
-    lbPrev.style.display = '';
-    lbNext.style.display = '';
-    curImages = proj.images;
+    if (slides.length === 0) return;
+
+    curImages = slides;
     curIdx = 0;
     lbProject.textContent = PROJECT_LABELS[projectName] || projectName;
-    lbStrip.innerHTML = curImages.map((src, i) =>
-      `<img class="lb-thumb${i === 0 ? ' active' : ''}" src="${src}" data-i="${i}" alt="">`
-    ).join('');
+
+    // Build thumbnail strip
+    lbStrip.innerHTML = slides.map((s, i) => {
+      if (s.type === 'video') {
+        return `<img class="lb-thumb${i === 0 ? ' active' : ''}" src="https://img.youtube.com/vi/${s.src}/hqdefault.jpg" data-i="${i}" alt="">`;
+      }
+      return `<img class="lb-thumb${i === 0 ? ' active' : ''}" src="${s.src}" data-i="${i}" alt="">`;
+    }).join('');
     lbStrip.querySelectorAll('.lb-thumb').forEach(t =>
       t.addEventListener('click', () => goTo(+t.dataset.i))
     );
+
+    // Show navigation only if more than 1 slide
+    lbPrev.style.display = slides.length > 1 ? '' : 'none';
+    lbNext.style.display = slides.length > 1 ? '' : 'none';
+
     updateLb();
     lb.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -855,7 +852,6 @@
   function closeLightbox() {
     lb.classList.remove('active');
     document.body.style.overflow = '';
-    // Stop video playback
     const lbIframe = document.getElementById('lbIframe');
     if (lbIframe) lbIframe.src = '';
   }
@@ -866,7 +862,24 @@
   }
 
   function updateLb() {
-    lbImg.src = curImages[curIdx];
+    const slide = curImages[curIdx];
+    const lbIframe = document.getElementById('lbIframe');
+    const lbImgEl = document.getElementById('lbImg');
+    const lbImgWrap = document.querySelector('.lb-img-wrap');
+
+    if (slide.type === 'video') {
+      lbImgEl.style.display = 'none';
+      lbIframe.style.display = 'block';
+      lbIframe.src = `https://www.youtube.com/embed/${slide.src}?autoplay=1&rel=0`;
+      lbImgWrap.classList.add('video-mode');
+    } else {
+      lbIframe.style.display = 'none';
+      lbIframe.src = '';
+      lbImgEl.style.display = 'block';
+      lbImgEl.src = slide.src;
+      lbImgWrap.classList.remove('video-mode');
+    }
+
     lbCounter.textContent = `${curIdx + 1} / ${curImages.length}`;
     lbPrev.disabled = curIdx === 0;
     lbNext.disabled = curIdx === curImages.length - 1;
