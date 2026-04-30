@@ -963,7 +963,7 @@
     wheelLock = true;
     if (e.deltaY > 0) goTo(curIdx + 1);
     else goTo(curIdx - 1);
-    setTimeout(() => { wheelLock = false; }, 250);
+    setTimeout(() => { wheelLock = false; }, 100);
   }, { passive: false });
 
   const toast = document.getElementById('toast');
