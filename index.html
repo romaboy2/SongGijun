@@ -168,16 +168,14 @@
 </head>
 <body>
 
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 <div class="toast" id="toast"></div>
 
 <nav>
   <a href="#about" class="nav-logo">Song Gijun</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#career">Career</a></li>
+    <li><a href="#work">Works</a></li>
+    <li><a href="#career">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -192,7 +190,7 @@
   <div class="hero-content">
     <p class="hero-label reveal">3D Visual Artist · Seoul, KR</p>
     <h1 class="hero-name reveal" style="transition-delay:0.1s">Song Gijun<br><em class="hero-role">3D Environment Artist</em></h1>
-    <a href="#work" class="hero-cta reveal" style="transition-delay:0.2s">Works 보기 →</a>
+    <a href="#work" class="hero-cta reveal" style="transition-delay:0.2s">Personal Works 보기 →</a>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
@@ -203,7 +201,7 @@
 <section id="work">
   <div class="section-header reveal">
     <span class="section-num">01</span>
-    <h2 class="section-title">Selected <em>Works</em></h2>
+    <h2 class="section-title">Personal <em>Works</em></h2>
   </div>
   <div class="divider"></div>
   <div class="gallery-grid">
@@ -348,27 +346,14 @@
 <section id="career">
   <div class="section-header reveal">
     <span class="section-num">02</span>
-    <h2 class="section-title">Career <em>Timeline</em></h2>
+    <h2 class="section-title">Education</h2>
   </div>
   <div class="divider"></div>
   <div class="timeline">
     <div class="timeline-item reveal">
-      <p class="timeline-period">2022 — Present</p>
-      <h3 class="timeline-role">Senior 3D Artist</h3>
-      <p class="timeline-company">회사명 · Seoul</p>
-      <p class="timeline-desc">3D 환경 및 프롭 모델링, 텍스처링, 라이팅을 담당. 다수의 실사 렌더링 프로젝트 리드.</p>
-      <div class="timeline-tags">
-        <span class="tag">ZBrush</span><span class="tag">Substance</span><span class="tag">Marmoset</span><span class="tag">Unreal</span>
-      </div>
-    </div>
-    <div class="timeline-item reveal" style="transition-delay:0.1s">
-      <p class="timeline-period">2020 — 2022</p>
-      <h3 class="timeline-role">3D Modeler</h3>
-      <p class="timeline-company">회사명 · Seoul</p>
-      <p class="timeline-desc">하드서피스 및 오가닉 모델링 작업. 게임 및 영상용 에셋 제작 경험.</p>
-      <div class="timeline-tags">
-        <span class="tag">3ds Max</span><span class="tag">Maya</span><span class="tag">Substance Painter</span>
-      </div>
+      <p class="timeline-period">2017.03 — 2024.02</p>
+      <h3 class="timeline-role">전주대학교 게임콘텐츠학과</h3>
+      <p class="timeline-company">졸업 · Bachelor's Degree</p>
     </div>
   </div>
 </section>
@@ -553,15 +538,6 @@
   function showToast(msg) { toast.textContent = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); }
   document.getElementById('emailBtn').addEventListener('click', () => {
     navigator.clipboard.writeText(EMAIL).then(() => showToast('이메일이 복사되었습니다 ✓'));
-  });
-
-  const dot = document.getElementById('cursorDot'), ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  (function anim() { dot.style.cssText += `left:${mx}px;top:${my}px`; rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.cssText += `left:${rx}px;top:${ry}px`; requestAnimationFrame(anim); })();
-  document.querySelectorAll('a,button,.gallery-item').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.style.width='50px'; ring.style.height='50px'; ring.style.borderColor='rgba(201,162,39,0.7)'; });
-    el.addEventListener('mouseleave', () => { ring.style.width='32px'; ring.style.height='32px'; ring.style.borderColor='rgba(201,162,39,0.4)'; });
   });
 
   const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
