@@ -138,19 +138,67 @@
   .lb-counter { font-family: var(--mono); font-size: 11px; color: var(--cream-dim); letter-spacing: 0.1em; margin-top: 0.2rem; }
   .lb-close { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-dim); background: none; border: 1px solid var(--line-hover); padding: 0.6rem 1.2rem; cursor: pointer; transition: all 0.2s; }
   .lb-close:hover { color: var(--cream); border-color: var(--cream-dim); }
-  .lb-main { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; }
-  .lb-img-wrap { max-width: 90vw; max-height: 75vh; display: flex; align-items: center; justify-content: center; }
-  .lb-img-wrap img { max-width: 100%; max-height: 75vh; object-fit: contain; display: block; }
+
+  /* Main image area takes full screen except for right side panel */
+  .lb-main {
+    position: relative;
+    width: calc(100vw - 200px);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 200px;
+  }
+  .lb-img-wrap {
+    max-width: 90%;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lb-img-wrap img { max-width: 100%; max-height: 80vh; object-fit: contain; display: block; }
+
+  /* Navigation buttons */
   .lb-btn { position: fixed; top: 50%; transform: translateY(-50%); background: none; border: 1px solid var(--line-hover); color: var(--cream-dim); font-family: var(--mono); font-size: 18px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; z-index: 10; }
   .lb-btn:hover { color: var(--cream); border-color: var(--cream-dim); background: rgba(242,237,228,0.05); }
   .lb-prev { left: 1.5rem; }
-  .lb-next { right: 1.5rem; }
+  .lb-next { right: calc(200px + 1.5rem); }
   .lb-btn:disabled { opacity: 0.2; cursor: default; }
-  .lb-strip { position: fixed; bottom: 0; left: 0; right: 0; display: flex; gap: 6px; padding: 1rem 2rem; overflow-x: auto; background: linear-gradient(to top, rgba(8,8,8,0.95), transparent); scrollbar-width: none; }
-  .lb-strip::-webkit-scrollbar { display: none; }
-  .lb-thumb { width: 60px; height: 45px; object-fit: cover; opacity: 0.4; cursor: pointer; transition: opacity 0.2s; flex-shrink: 0; border: 1px solid transparent; }
+
+  /* Right side thumbnail panel */
+  .lb-strip {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 5rem 1rem 1.5rem 1rem;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.5);
+    border-left: 1px solid var(--line);
+    scrollbar-width: thin;
+    scrollbar-color: var(--cream-dim) transparent;
+  }
+  .lb-strip::-webkit-scrollbar { width: 4px; }
+  .lb-strip::-webkit-scrollbar-track { background: transparent; }
+  .lb-strip::-webkit-scrollbar-thumb { background: var(--line-hover); border-radius: 2px; }
+  .lb-strip::-webkit-scrollbar-thumb:hover { background: var(--cream-dim); }
+
+  .lb-thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+    border: 2px solid transparent;
+  }
   .lb-thumb.active { opacity: 1; border-color: var(--gold); }
-  .lb-thumb:hover { opacity: 0.8; }
+  .lb-thumb:hover { opacity: 0.85; }
 
   #career { background: var(--ink-2); }
   .timeline { position: relative; padding-left: 3rem; }
@@ -195,6 +243,18 @@
     .gallery-item:nth-child(1) .gallery-thumb { aspect-ratio: 16/9; }
     footer { flex-direction: column; gap: 1rem; text-align: center; }
     .lb-btn { display: none; }
+
+    /* Mobile: bring thumbnails back to bottom */
+    .lb-main { width: 100vw; margin-right: 0; height: calc(100vh - 100px); }
+    .lb-strip {
+      top: auto; right: 0; left: 0;
+      width: 100%; height: 90px;
+      flex-direction: row;
+      padding: 0.75rem 1rem;
+      border-left: none;
+      border-top: 1px solid var(--line);
+    }
+    .lb-thumb { width: 80px; height: 60px; aspect-ratio: auto; flex-shrink: 0; }
   }
 </style>
 </head>
