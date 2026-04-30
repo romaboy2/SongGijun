@@ -213,12 +213,12 @@
 
     <div class="gallery-item reveal" data-project="MegicDesk">
       <div class="gallery-thumb">
-        <div class="gallery-bg" style="background-image: url('Images/MegicDesk/Thumbnail.png');"></div>
+        <div class="gallery-bg" style="background-image: url('Images/MegicDesk/Scene02.png');"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Environment</span>
           <div class="gallery-name">Magic Desk</div>
-          <div class="gallery-count">37 images · 1 gif</div>
+          <div class="gallery-count">36 images · 1 gif</div>
         </div>
       </div>
     </div>
@@ -230,7 +230,7 @@
         <div class="gallery-info">
           <span class="gallery-tag">3D · Props</span>
           <div class="gallery-name">Cannon</div>
-          <div class="gallery-count">22 images</div>
+          <div class="gallery-count">23 images</div>
         </div>
       </div>
     </div>
@@ -242,7 +242,7 @@
         <div class="gallery-info">
           <span class="gallery-tag">3D · Vehicle</span>
           <div class="gallery-name">Wagon</div>
-          <div class="gallery-count">36 images · 1 gif</div>
+          <div class="gallery-count">34 images · 1 gif</div>
         </div>
       </div>
     </div>
@@ -393,8 +393,8 @@
     Cannon: {
       images: [
         'Thumbnail','Shot01','Shot02','Shot03','Shot04','Shot05','Shot06','Shot07',
-        'Main05','Main06','Main07','Main08','Main09','Main10','Main11','Main12',
-        'BPR_Composite','BPR_Composite02','BPR_Composite03',
+        'Main02','Main03','Main04','Main05','Main06','Main07','Main08','Main09','Main10','Main11','Main12',
+        'BPR_Composite',
         'Zbrush01','Zbrush02','subpaint'
       ].map(n => `Images/Cannon/${n}.png`)
     },
@@ -404,8 +404,8 @@
           'Wagon01','Wagon02','Wagon03','Wagon04','Wagon05','Wagon06',
           'Wagon07','Wagon08','Wagon09','Wagon10','Wagon11','Wagon12',
           '1920_1080','1920_1080_2',
-          'W01','W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12',
-          'WA01','WA02','WA03','WA04','WA05','WA06','WA07','WA08','WA09'
+          'W02','W03','W04','W05','W06','W07','W08','W09','W10','W11','W12',
+          'WA02','WA03','WA04','WA05','WA06','WA07','WA08','WA09'
         ].map(n => `Images/Wagon/${n}.png`),
         'Images/Wagon/Gif.gif'
       ]
@@ -421,7 +421,6 @@
     MegicDesk: {
       images: [
         ...[
-          'Thumbnail',
           'Scene01','Scene02','Scene03','Scene04','Scene05','Scene06','Scene07','Scene08','Scene09',
           'Desk01','Desk02','Desk03','Desk04','Desk05','Desk06','Desk07','Desk08','Desk09',
           'Prop01','Prop02','Prop03','Prop04','Prop05','Prop06','Prop07','Prop08','Prop09','Prop10',
@@ -453,6 +452,19 @@
       images: ['Pillar_Main','Main','Main02','Shot02']
         .map(n => `Images/Pillar/${n}.png`)
     },
+    Rock: {
+      images: [
+        ...[
+          'Rock_C_Main_Light','Rock_C_Main_Light02',
+          'Rock_C_Main_Dark','Rock_C_Main_Dark02',
+          'Rock_C','Rock_C01','Rock_C02','Rock_C03',
+          'Rock_C_Wireframe','Rock_C_Zbrush','Rock_C_Thumbnail',
+          'Rock_B_Main','Rock_B_Rev','RocK_B_Three','Rock_B01','Rock_B_Thumbnail',
+          'Rock_A_ScaleShot','Rock_A_Shots','Rock_A_WireShot','Rock_A_Zbrush'
+        ].map(n => `Images/Rock/${n}.png`),
+        'Images/Rock/Gif.gif'
+      ]
+    },
     Tile: {
       images: ['Tile01','Tile02','Tilling01','Tilling02','Tile01_Zbrush','Tile02_Zbrush']
         .map(n => `Images/Tile/${n}.png`)
@@ -467,6 +479,7 @@
     FirePlace: 'FirePlace',
     SubstanceDesigner: 'Substance Designer',
     Pillar: 'Pillar',
+    Rock: 'Rock',
     Tile: 'Tile'
   };
 
