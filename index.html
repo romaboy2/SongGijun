@@ -57,6 +57,16 @@
   h1.hero-name { font-family: var(--serif); font-size: clamp(64px, 9vw, 130px); font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; color: var(--cream); margin-bottom: 2rem; }
   h1.hero-name em { font-style: italic; color: var(--gold); }
   h1.hero-name em.hero-role { font-size: clamp(28px, 4vw, 56px); display: inline-block; margin-top: 0.5rem; letter-spacing: 0; font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+
+  .hero-edu {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--cream-dim);
+    margin-bottom: 2.5rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--gold-dim);
+  }
   .hero-bio { max-width: 480px; font-size: 15px; color: var(--cream-dim); line-height: 1.8; border-left: 1px solid var(--gold-dim); padding-left: 1.5rem; margin-bottom: 3rem; }
   .hero-cta { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream); text-decoration: none; border: 1px solid var(--line-hover); padding: 0.9rem 2rem; transition: all 0.3s; }
   .hero-cta:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
@@ -197,7 +207,6 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#work">Works</a></li>
-    <li><a href="#career">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -212,6 +221,7 @@
   <div class="hero-content">
     <p class="hero-label reveal">3D Visual Artist · Seoul, KR</p>
     <h1 class="hero-name reveal" style="transition-delay:0.1s">Song Gijun<br><em class="hero-role">3D Environment Artist</em></h1>
+    <p class="hero-edu reveal" style="transition-delay:0.15s">전주대학교 게임콘텐츠학과 졸업 · 2017.03 — 2024.02</p>
     <a href="#work" class="hero-cta reveal" style="transition-delay:0.2s">Personal Works 보기 →</a>
   </div>
   <div class="hero-scroll">
@@ -365,25 +375,10 @@
   <div class="lb-strip" id="lbStrip"></div>
 </div>
 
-<section id="career">
-  <div class="section-header reveal">
-    <span class="section-num">02</span>
-    <h2 class="section-title">Education</h2>
-  </div>
-  <div class="divider"></div>
-  <div class="timeline">
-    <div class="timeline-item reveal">
-      <p class="timeline-period">2017.03 — 2024.02</p>
-      <h3 class="timeline-role">전주대학교 게임콘텐츠학과</h3>
-      <p class="timeline-company">졸업 · Bachelor's Degree</p>
-    </div>
-  </div>
-</section>
-
 <section id="contact">
   <div class="contact-inner">
     <div class="section-header reveal">
-      <span class="section-num">03</span>
+      <span class="section-num">02</span>
     </div>
     <h2 class="contact-big reveal">Let's <em>Work</em><br>Together</h2>
     <p class="contact-desc reveal" style="transition-delay:0.1s">새로운 프로젝트나 협업 제안은 언제든지 환영합니다.</p>
