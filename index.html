@@ -74,8 +74,12 @@
   .gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
   .gallery-item { position: relative; overflow: hidden; cursor: pointer; }
 
-  /* All cards uniform 4-column layout — 3 cards per row, 3 rows */
-  .gallery-item:nth-child(1) { grid-column: span 4; }
+  /* First card = spotlight (latest work) — moderate size, centered */
+  .gallery-item:nth-child(1) { grid-column: 3 / span 8; margin-bottom: 0.5rem; }
+  .gallery-item:nth-child(1) .gallery-thumb { aspect-ratio: 16/9; }
+  .gallery-item:nth-child(1) .gallery-name { font-size: 28px; }
+
+  /* Rest — uniform 3x3 grid */
   .gallery-item:nth-child(2) { grid-column: span 4; }
   .gallery-item:nth-child(3) { grid-column: span 4; }
   .gallery-item:nth-child(4) { grid-column: span 4; }
@@ -98,6 +102,19 @@
   .gallery-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.3rem; }
   .gallery-name { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--cream); }
   .gallery-count { font-family: var(--mono); font-size: 10px; color: var(--cream-dim); margin-top: 0.25rem; }
+
+  .latest-badge {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    z-index: 3;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 0.4rem 0.9rem;
+  }
 
   .lightbox { position: fixed; inset: 0; background: rgba(8,8,8,0.98); z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
   .lightbox.active { opacity: 1; pointer-events: all; }
@@ -208,6 +225,7 @@
 
     <div class="gallery-item reveal" data-project="MegicDesk">
       <div class="gallery-thumb">
+        <span class="latest-badge">Latest Work</span>
         <div class="gallery-bg" style="background-image: url('Images/MegicDesk/Scene08.png');"></div>
         <div class="gallery-bg-hover" style="background-image: url('Images/MegicDesk/Scene03.png');"></div>
         <div class="gallery-overlay"></div>
