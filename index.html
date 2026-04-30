@@ -185,8 +185,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: zoom-in;
+    overflow: hidden;
   }
-  .lb-img-wrap img { max-width: 100%; max-height: 80vh; object-fit: contain; display: block; }
+  .lb-img-wrap.zoomed { cursor: zoom-out; }
+  .lb-img-wrap img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+    transform-origin: center center;
+  }
+  .lb-img-wrap.zoomed img {
+    transform: scale(2);
+    cursor: zoom-out;
+  }
 
   /* Navigation buttons */
   .lb-btn { position: fixed; top: 50%; transform: translateY(-50%); background: none; border: 1px solid var(--line-hover); color: var(--cream-dim); font-family: var(--mono); font-size: 18px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; z-index: 10; }
@@ -756,6 +770,36 @@
     if (e.key === 'ArrowLeft') goTo(curIdx - 1);
     if (e.key === 'ArrowRight') goTo(curIdx + 1);
   });
+
+  /* ── 클릭하여 이미지 확대 ── */
+  const lbImgWrap = document.querySelector('.lb-img-wrap');
+  lbImgWrap.addEventListener('click', e => {
+    e.stopPropagation();
+    lbImgWrap.classList.toggle('zoomed');
+  });
+  // 이미지 변경 시 줌 해제
+  const originalGoTo = goTo;
+  goTo = function(i) {
+    lbImgWrap.classList.remove('zoomed');
+    originalGoTo(i);
+  };
+  lbPrev.removeEventListener('click', () => goTo(curIdx - 1));
+  lbNext.removeEventListener('click', () => goTo(curIdx + 1));
+  lbPrev.onclick = () => goTo(curIdx - 1);
+  lbNext.onclick = () => goTo(curIdx + 1);
+
+  /* ── 휠 스크롤로 이미지 넘기기 ── */
+  let wheelLock = false;
+  lb.addEventListener('wheel', e => {
+    if (!lb.classList.contains('active')) return;
+    if (lbImgWrap.classList.contains('zoomed')) return; // 줌 상태에서는 비활성
+    e.preventDefault();
+    if (wheelLock) return;
+    wheelLock = true;
+    if (e.deltaY > 0) goTo(curIdx + 1);
+    else goTo(curIdx - 1);
+    setTimeout(() => { wheelLock = false; }, 250);
+  }, { passive: false });
 
   const toast = document.getElementById('toast');
   function showToast(msg) { toast.textContent = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); }
