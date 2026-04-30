@@ -426,14 +426,15 @@
       </div>
     </div>
 
-    <div class="gallery-item reveal" style="transition-delay:0.3s" data-project="SubstanceDesigner">
+    <div class="gallery-item reveal" style="transition-delay:0.3s" data-project="SubstanceDesigner" data-random="true">
       <div class="gallery-thumb">
-        <div class="gallery-bg" style="background-image: url('Images/SubstanceDesigner/Rock_A.png');"></div>
+        <div class="gallery-bg" id="substanceBg"></div>
+        <div class="gallery-bg-hover" id="substanceBgHover"></div>
         <div class="gallery-overlay"></div>
         <div class="gallery-info">
           <span class="gallery-tag">Material · Substance</span>
           <div class="gallery-name">Substance Designer</div>
-          <div class="gallery-count">20 images</div>
+          <div class="gallery-count">19 images</div>
         </div>
       </div>
     </div>
@@ -623,7 +624,7 @@
     SubstanceDesigner: {
       images: [
         'Rock_A','Rock_B01','Rock_B02','Wood','Metal',
-        'Chainmale','Fabric01','Fabric02','FabricMax',
+        'Chainmale','Fabric01','Fabric02',
         'Sidewalk01','Sidewalk02','SidewalkMax',
         'Tile','Tile02','Tree','Tree02',
         'WetSoil01','WetSoil02','IceAge','Sofa'
@@ -764,6 +765,20 @@
 
   const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), {threshold:0.1});
   document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+  /* ── Substance Designer 랜덤 썸네일 ── */
+  (function() {
+    const bg = document.getElementById('substanceBg');
+    const bgHover = document.getElementById('substanceBgHover');
+    if (!bg) return;
+    const subImages = PROJECTS.SubstanceDesigner.images;
+    if (subImages.length < 2) return;
+    const idx1 = Math.floor(Math.random() * subImages.length);
+    let idx2 = Math.floor(Math.random() * subImages.length);
+    while (idx2 === idx1) idx2 = Math.floor(Math.random() * subImages.length);
+    bg.style.backgroundImage = `url('${subImages[idx1]}')`;
+    bgHover.style.backgroundImage = `url('${subImages[idx2]}')`;
+  })();
 
   /* ── 비디오 순차 재생 ── */
   const VIDEOS = [
