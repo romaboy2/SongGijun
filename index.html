@@ -196,10 +196,12 @@
     display: block;
     transition: transform 0.3s ease;
     transform-origin: center center;
+    will-change: transform, transform-origin;
   }
   .lb-img-wrap.zoomed img {
-    transform: scale(2);
+    transform: scale(2.5);
     cursor: zoom-out;
+    transition: transform 0.3s ease, transform-origin 0.1s ease;
   }
 
   /* Navigation buttons */
@@ -771,16 +773,39 @@
     if (e.key === 'ArrowRight') goTo(curIdx + 1);
   });
 
-  /* ── 클릭하여 이미지 확대 ── */
+  /* ── 클릭하여 이미지 확대 (마우스 위치 따라가기) ── */
   const lbImgWrap = document.querySelector('.lb-img-wrap');
+  const lbImgEl = document.getElementById('lbImg');
+
   lbImgWrap.addEventListener('click', e => {
     e.stopPropagation();
     lbImgWrap.classList.toggle('zoomed');
+    if (!lbImgWrap.classList.contains('zoomed')) {
+      lbImgEl.style.transformOrigin = 'center center';
+    } else {
+      // 확대 시작 시 클릭한 위치를 기준점으로 설정
+      updateZoomOrigin(e);
+    }
   });
+
+  function updateZoomOrigin(e) {
+    const rect = lbImgEl.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    lbImgEl.style.transformOrigin = `${x}% ${y}%`;
+  }
+
+  lbImgWrap.addEventListener('mousemove', e => {
+    if (lbImgWrap.classList.contains('zoomed')) {
+      updateZoomOrigin(e);
+    }
+  });
+
   // 이미지 변경 시 줌 해제
   const originalGoTo = goTo;
   goTo = function(i) {
     lbImgWrap.classList.remove('zoomed');
+    lbImgEl.style.transformOrigin = 'center center';
     originalGoTo(i);
   };
   lbPrev.removeEventListener('click', () => goTo(curIdx - 1));
