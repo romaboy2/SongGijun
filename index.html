@@ -193,6 +193,21 @@
   .aboutme-content { padding: 0; }
   .aboutme-block { margin-bottom: 2rem; }
   .aboutme-block:last-child { margin-bottom: 0; }
+  .aboutme-name {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .aboutme-name-en {
+    font-style: italic;
+    font-size: 0.55em;
+    color: var(--gold);
+    margin-left: 0.5em;
+    font-weight: 300;
+  }
   .aboutme-heading {
     font-family: var(--mono);
     font-size: 11px;
@@ -226,6 +241,37 @@
     color: var(--ink);
     background: var(--gold);
     border-color: var(--gold);
+  }
+  .aboutme-email-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: transparent;
+    border: 1px solid var(--line-hover);
+    padding: 0.7rem 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--mono);
+  }
+  .aboutme-email-text {
+    font-size: 13px;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+  }
+  .aboutme-email-action {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    padding-left: 0.85rem;
+    border-left: 1px solid var(--line-hover);
+    transition: color 0.3s;
+  }
+  .aboutme-email-btn:hover {
+    border-color: var(--gold);
+  }
+  .aboutme-email-btn:hover .aboutme-email-action {
+    color: var(--gold);
   }
 
   /* University Works - 5 columns, more compact than Personal */
@@ -446,7 +492,6 @@
     <h1 class="hero-name reveal" style="transition-delay:0.1s">Song Gijun<br><em class="hero-role">3D Environment Artist</em></h1>
     <div class="hero-actions reveal" style="transition-delay:0.2s">
       <a href="#work" class="hero-cta">Personal Works 보기 →</a>
-      <button class="hero-cta hero-cta-ghost" id="emailBtn">이메일 복사 ✉</button>
     </div>
   </div>
   <div class="hero-scroll">
@@ -745,6 +790,10 @@
     </div>
     <div class="aboutme-content reveal" style="transition-delay:0.1s">
       <div class="aboutme-block">
+        <h3 class="aboutme-name">송기준 <span class="aboutme-name-en">Song Gijun</span></h3>
+      </div>
+
+      <div class="aboutme-block">
         <h3 class="aboutme-heading">Education</h3>
         <p class="aboutme-text">전주대학교 게임콘텐츠학과 졸업<br><span class="muted">2017.03 — 2024.02</span></p>
       </div>
@@ -760,6 +809,14 @@
           <span class="skill-tag">Unity</span>
           <span class="skill-tag">Unreal Engine</span>
         </div>
+      </div>
+
+      <div class="aboutme-block">
+        <h3 class="aboutme-heading">Contact</h3>
+        <button class="aboutme-email-btn" id="emailBtn">
+          <span class="aboutme-email-text">sgj0616@naver.com</span>
+          <span class="aboutme-email-action">이메일 복사 ✉</span>
+        </button>
       </div>
     </div>
   </div>
