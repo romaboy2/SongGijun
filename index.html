@@ -276,6 +276,44 @@
     color: var(--gold);
   }
 
+  .aboutme-credit-note {
+    font-size: 13px;
+    color: var(--cream-dim);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .credit-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .credit-list li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    padding-left: 0.85rem;
+    border-left: 1px solid var(--gold-dim);
+  }
+  .credit-work {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--cream);
+    min-width: 90px;
+  }
+  .credit-list a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--cream-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .credit-list a:hover { color: var(--gold); }
+
   /* University Works - 5 columns, more compact than Personal */
   .university-grid {
     grid-template-columns: repeat(5, 1fr);
@@ -323,6 +361,32 @@
   .lb-title-wrap { display: flex; flex-direction: column; }
   .lb-project { font-family: var(--serif); font-size: 24px; font-weight: 300; color: var(--cream); }
   .lb-counter { font-family: var(--mono); font-size: 11px; color: var(--cream-dim); letter-spacing: 0.1em; margin-top: 0.2rem; }
+  .lb-credits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.6rem;
+    max-width: 600px;
+  }
+  .lb-credit-item {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--cream-dim);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    padding: 0.3rem 0.65rem;
+    transition: all 0.2s;
+  }
+  .lb-credit-item:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+  .lb-credit-label {
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-right: 0.4rem;
+  }
   .lb-close { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream-dim); background: none; border: 1px solid var(--line-hover); padding: 0.4rem 0.8rem; cursor: pointer; transition: all 0.2s; }
   .lb-close:hover { color: var(--cream); border-color: var(--cream-dim); }
 
@@ -777,6 +841,7 @@
     <div class="lb-title-wrap">
       <span class="lb-project" id="lbProject"></span>
       <span class="lb-counter" id="lbCounter"></span>
+      <span class="lb-credits" id="lbCredits"></span>
     </div>
     <button class="lb-close" id="lbClose">[ ESC ] Close</button>
   </div>
@@ -832,6 +897,26 @@
           <span class="skill-tag">Unreal Engine</span>
         </div>
       </div>
+
+      <div class="aboutme-block">
+        <h3 class="aboutme-heading">Credits & Resources</h3>
+        <p class="aboutme-text aboutme-credit-note">일부 작품의 배경 환경에 외부 에셋을 사용했습니다. 모델링 및 텍스처링 작업물은 모두 직접 제작했습니다.</p>
+        <ul class="credit-list">
+          <li>
+            <span class="credit-work">Wagon</span>
+            <a href="https://www.fab.com/listings/9bfc58fe-b011-437f-b74c-44e23101e57f?lang=ko" target="_blank" rel="noopener">Brushify - ForestPack ↗</a>
+            <a href="https://www.artstation.com/artwork/v2RbQE" target="_blank" rel="noopener">Reference: ArtStation ↗</a>
+          </li>
+          <li>
+            <span class="credit-work">Cannon</span>
+            <a href="https://www.fab.com/listings/4cd36577-70b3-4c10-a63c-4943afbabf0b" target="_blank" rel="noopener">Modular Medieval Environment ↗</a>
+          </li>
+          <li>
+            <span class="credit-work">Magic Desk</span>
+            <a href="https://www.fab.com/listings/4cc9a46e-6870-4e44-8aeb-4ffb61e76b4c" target="_blank" rel="noopener">Modular Dungeon Kit ↗</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -859,7 +944,10 @@
         'Main02','Main03','Main04','Main05','Main06','Main07','Main08','Main09','Main10','Main11','Main12',
         'BPR_Composite',
         'Zbrush01','Zbrush02','subpaint'
-      ].map(n => `Images/2025.11_Cannon/${n}.png`)
+      ].map(n => `Images/2025.11_Cannon/${n}.png`),
+      credits: [
+        { label: 'Background', name: 'Modular Medieval Environment', url: 'https://www.fab.com/listings/4cd36577-70b3-4c10-a63c-4943afbabf0b' }
+      ]
     },
     Wagon: {
       images: [
@@ -871,6 +959,10 @@
           'WA02','WA03','WA04','WA05','WA06','WA07','WA08','WA09'
         ].map(n => `Images/2025.08_Wagon/${n}.png`),
         'Images/2025.08_Wagon/Gif.gif'
+      ],
+      credits: [
+        { label: 'Background', name: 'Brushify - ForestPack', url: 'https://www.fab.com/listings/9bfc58fe-b011-437f-b74c-44e23101e57f?lang=ko' },
+        { label: 'Reference', name: 'ArtStation Concept Art', url: 'https://www.artstation.com/artwork/v2RbQE' }
       ]
     },
     Corridor: {
@@ -890,6 +982,9 @@
           'Zbrush01','Zbrush02','Zbrush03','Zbrush04','Zbrush05','Zbrush06','Zbrush07','Zbrush08'
         ].map(n => `Images/2026.03_MegicDesk/${n}.png`),
         'Images/2026.03_MegicDesk/Gif.gif'
+      ],
+      credits: [
+        { label: 'Background', name: 'Modular Dungeon Kit', url: 'https://www.fab.com/listings/4cc9a46e-6870-4e44-8aeb-4ffb61e76b4c' }
       ]
     },
     FirePlace: {
@@ -1027,6 +1122,16 @@
     curImages = slides;
     curIdx = 0;
     lbProject.textContent = PROJECT_LABELS[projectName] || projectName;
+
+    // Display credits if any
+    const lbCredits = document.getElementById('lbCredits');
+    if (proj.credits && proj.credits.length > 0) {
+      lbCredits.innerHTML = proj.credits.map(c =>
+        `<a href="${c.url}" target="_blank" rel="noopener" class="lb-credit-item"><span class="lb-credit-label">${c.label}</span>${c.name} ↗</a>`
+      ).join('');
+    } else {
+      lbCredits.innerHTML = '';
+    }
 
     // Build thumbnail strip
     lbStrip.innerHTML = slides.map((s, i) => {
