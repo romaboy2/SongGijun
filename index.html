@@ -36,7 +36,9 @@
     object-fit: cover;
     z-index: 0;
     opacity: 0.9;
+    transition: opacity 0.4s ease;
   }
+  .hero-video.fading { opacity: 0; }
   .hero-overlay {
     position: absolute;
     inset: 0;
@@ -482,7 +484,7 @@
 </nav>
 
 <section id="about">
-  <video class="hero-video" autoplay muted playsinline poster="Images/2025.08_Wagon/Wagon07.png" id="heroVideo">
+  <video class="hero-video" autoplay muted playsinline id="heroVideo">
     <source src="Videos/Medieval_Ani.mp4" type="video/mp4" id="heroSource">
   </video>
   <div class="hero-overlay"></div>
@@ -1238,10 +1240,19 @@
   const heroSource = document.getElementById('heroSource');
 
   heroVideo.addEventListener('ended', () => {
-    videoIdx = (videoIdx + 1) % VIDEOS.length;
-    heroSource.src = VIDEOS[videoIdx];
-    heroVideo.load();
-    heroVideo.play().catch(() => {});
+    // 페이드 아웃
+    heroVideo.classList.add('fading');
+    setTimeout(() => {
+      videoIdx = (videoIdx + 1) % VIDEOS.length;
+      heroSource.src = VIDEOS[videoIdx];
+      heroVideo.load();
+      heroVideo.play().catch(() => {});
+    }, 400);
+  });
+
+  // 새 영상 재생 시작하면 페이드 인
+  heroVideo.addEventListener('playing', () => {
+    heroVideo.classList.remove('fading');
   });
 </script>
 </body>
