@@ -357,16 +357,16 @@
 
   .lightbox { position: fixed; inset: 0; background: rgba(8,8,8,0.98); z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
   .lightbox.active { opacity: 1; pointer-events: all; }
-  .lb-header { position: fixed; top: 0; left: 0; right: 220px; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2.5rem; z-index: 10; }
-  .lb-title-wrap { display: flex; flex-direction: column; }
+  .lb-header { position: fixed; top: 0; left: 0; right: 220px; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2.5rem; z-index: 10; gap: 2rem; }
+  .lb-title-wrap { display: flex; flex-direction: row; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .lb-title-meta { display: flex; flex-direction: column; }
   .lb-project { font-family: var(--serif); font-size: 24px; font-weight: 300; color: var(--cream); }
   .lb-counter { font-family: var(--mono); font-size: 11px; color: var(--cream-dim); letter-spacing: 0.1em; margin-top: 0.2rem; }
   .lb-credits {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 0.6rem;
-    max-width: 600px;
+    gap: 0.5rem;
+    max-width: 500px;
   }
   .lb-credit-item {
     font-family: var(--mono);
@@ -839,8 +839,10 @@
 <div class="lightbox" id="lightbox">
   <div class="lb-header">
     <div class="lb-title-wrap">
-      <span class="lb-project" id="lbProject"></span>
-      <span class="lb-counter" id="lbCounter"></span>
+      <div class="lb-title-meta">
+        <span class="lb-project" id="lbProject"></span>
+        <span class="lb-counter" id="lbCounter"></span>
+      </div>
       <span class="lb-credits" id="lbCredits"></span>
     </div>
     <button class="lb-close" id="lbClose">[ ESC ] Close</button>
