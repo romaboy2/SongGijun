@@ -1313,6 +1313,90 @@
     setTimeout(() => { wheelLock = false; }, 100);
   }, { passive: false });
 
+  /* ── 모바일 터치 제스처 ── */
+  let touchStartX = 0, touchStartY = 0;
+  let touchStartTime = 0;
+  let lastTapTime = 0;
+  let touchPanStartX = 0, touchPanStartY = 0;
+  let isTouchPanning = false;
+  let touchMoved = false;
+
+  lbImgWrap.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchStartTime = Date.now();
+    touchMoved = false;
+
+    if (lbImgWrap.classList.contains('zoomed')) {
+      // 확대 상태: 드래그 시작
+      isTouchPanning = true;
+      touchPanStartX = panX;
+      touchPanStartY = panY;
+    }
+  }, { passive: true });
+
+  lbImgWrap.addEventListener('touchmove', e => {
+    if (e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) touchMoved = true;
+
+    if (isTouchPanning && lbImgWrap.classList.contains('zoomed')) {
+      // 확대 상태에서 드래그로 이동
+      e.preventDefault();
+      panX = touchPanStartX + dx;
+      panY = touchPanStartY + dy;
+      applyTransform();
+    }
+  }, { passive: false });
+
+  lbImgWrap.addEventListener('touchend', e => {
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    const elapsed = Date.now() - touchStartTime;
+    const wasPanning = isTouchPanning;
+    isTouchPanning = false;
+
+    // 확대 상태에서 드래그였으면 다른 동작 무시
+    if (wasPanning && touchMoved) return;
+
+    // 스와이프 감지 (확대 안 된 상태에서만)
+    if (!lbImgWrap.classList.contains('zoomed')) {
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+      if (absX > 50 && absX > absY * 1.5 && elapsed < 500) {
+        // 좌우 스와이프
+        if (dx < 0) goTo(curIdx + 1); // 왼쪽으로 → 다음
+        else goTo(curIdx - 1);        // 오른쪽으로 → 이전
+        return;
+      }
+    }
+
+    // 짧은 탭이면 더블탭 감지
+    if (!touchMoved && elapsed < 300) {
+      const now = Date.now();
+      const tapGap = now - lastTapTime;
+      if (tapGap < 300 && tapGap > 0) {
+        // 더블탭 → 확대/축소 토글
+        if (lbImgWrap.classList.contains('zoomed')) {
+          resetZoom();
+        } else {
+          lbImgWrap.classList.add('zoomed');
+          panX = 0; panY = 0;
+          applyTransform();
+        }
+        lastTapTime = 0;
+      } else {
+        lastTapTime = now;
+      }
+    }
+  }, { passive: true });
+
   const toast = document.getElementById('toast');
   function showToast(msg) { toast.textContent = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); }
   document.getElementById('emailBtn').addEventListener('click', () => {
