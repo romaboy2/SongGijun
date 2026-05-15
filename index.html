@@ -406,18 +406,45 @@
     text-transform: uppercase;
     margin-right: 0.4rem;
   }
-  .lb-caption {
-    font-family: var(--sans);
-    font-size: 12px;
-    color: var(--cream);
-    line-height: 1.5;
-    max-width: 500px;
-    padding: 0.5rem 0.85rem;
-    background: rgba(201, 162, 39, 0.08);
-    border-left: 2px solid var(--gold);
-    letter-spacing: 0.02em;
+
+  /* Caption overlay on image (bottom left) */
+  .lb-caption-overlay {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    max-width: 420px;
+    background: rgba(8, 8, 8, 0.92);
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.25rem;
+    z-index: 12;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
-  .lb-caption:empty { display: none; }
+  .lb-caption-overlay.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .lb-caption-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .lb-caption-text {
+    display: block;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--cream);
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
   .lb-close { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream-dim); background: none; border: 1px solid var(--line-hover); padding: 0.4rem 0.8rem; cursor: pointer; transition: all 0.2s; }
   .lb-close:hover { color: var(--cream); border-color: var(--cream-dim); }
 
@@ -884,7 +911,6 @@
         <span class="lb-counter" id="lbCounter"></span>
       </div>
       <span class="lb-credits" id="lbCredits"></span>
-      <span class="lb-caption" id="lbCaption"></span>
     </div>
     <button class="lb-close" id="lbClose">[ ESC ] Close</button>
   </div>
@@ -893,6 +919,10 @@
     <div class="lb-img-wrap">
       <img id="lbImg" src="" alt="">
       <iframe id="lbIframe" class="lb-video" style="display:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="lb-caption-overlay" id="lbCaption">
+      <span class="lb-caption-label">● Workflow</span>
+      <span class="lb-caption-text" id="lbCaptionText"></span>
     </div>
     <button class="lb-btn lb-next" id="lbNext">→</button>
   </div>
@@ -1217,6 +1247,8 @@
     document.body.style.overflow = '';
     const lbIframe = document.getElementById('lbIframe');
     if (lbIframe) lbIframe.src = '';
+    const lbCaption = document.getElementById('lbCaption');
+    if (lbCaption) lbCaption.classList.remove('visible');
   }
 
   function goTo(i) {
@@ -1249,14 +1281,19 @@
 
     // 캡션 업데이트
     const lbCaption = document.getElementById('lbCaption');
-    if (lbCaption) {
+    const lbCaptionText = document.getElementById('lbCaptionText');
+    if (lbCaption && lbCaptionText) {
       let captionText = '';
       if (curCaptions && slide.type === 'image' && slide.src) {
-        // 파일명만 추출해서 매칭 (예: "Images/2026.03_MegicDesk/Zbrush01.png" → "Zbrush01")
         const filename = slide.src.split('/').pop().replace(/\.(png|jpg|jpeg|gif|webp)$/i, '');
         captionText = curCaptions[filename] || '';
       }
-      lbCaption.textContent = captionText;
+      if (captionText) {
+        lbCaptionText.textContent = captionText;
+        lbCaption.classList.add('visible');
+      } else {
+        lbCaption.classList.remove('visible');
+      }
     }
 
     lbStrip.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === curIdx));
