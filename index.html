@@ -406,6 +406,18 @@
     text-transform: uppercase;
     margin-right: 0.4rem;
   }
+  .lb-caption {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--cream);
+    line-height: 1.5;
+    max-width: 500px;
+    padding: 0.5rem 0.85rem;
+    background: rgba(201, 162, 39, 0.08);
+    border-left: 2px solid var(--gold);
+    letter-spacing: 0.02em;
+  }
+  .lb-caption:empty { display: none; }
   .lb-close { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream-dim); background: none; border: 1px solid var(--line-hover); padding: 0.4rem 0.8rem; cursor: pointer; transition: all 0.2s; }
   .lb-close:hover { color: var(--cream); border-color: var(--cream-dim); }
 
@@ -872,6 +884,7 @@
         <span class="lb-counter" id="lbCounter"></span>
       </div>
       <span class="lb-credits" id="lbCredits"></span>
+      <span class="lb-caption" id="lbCaption"></span>
     </div>
     <button class="lb-close" id="lbClose">[ ESC ] Close</button>
   </div>
@@ -1018,6 +1031,16 @@
         ].map(n => `Images/2026.03_MegicDesk/${n}.png`),
         'Images/2026.03_MegicDesk/Gif.gif'
       ],
+      captions: {
+        'Zbrush01': '나노바나나로 이미지를 생성 후 Mesh-AI를 통해 하이폴을 만든 뒤 ZBrush에서 수정했습니다.',
+        'Zbrush02': '나노바나나로 이미지를 생성 후 Mesh-AI를 통해 하이폴을 만든 뒤 ZBrush에서 수정했습니다.',
+        'Zbrush03': '나노바나나로 이미지를 생성 후 Mesh-AI를 통해 하이폴을 만든 뒤 ZBrush에서 수정했습니다.',
+        'Zbrush04': '나노바나나로 이미지를 생성 후 Mesh-AI를 통해 하이폴을 만든 뒤 ZBrush에서 수정했습니다.',
+        'Zbrush05': '나노바나나로 이미지를 생성 후 Mesh-AI를 통해 하이폴을 만든 뒤 ZBrush에서 수정했습니다.',
+        'Zbrush06': '나노바나나로 이미지를 생성 후 Mesh-AI를 통해 하이폴을 만든 뒤 ZBrush에서 수정했습니다.',
+        'Zbrush07': '나노바나나로 이미지를 생성 후 Mesh-AI를 통해 하이폴을 만든 뒤 ZBrush에서 수정했습니다.',
+        'Zbrush08': '나노바나나로 이미지를 생성 후 Mesh-AI를 통해 하이폴을 만든 뒤 ZBrush에서 수정했습니다.'
+      },
       credits: [
         { label: 'Background', name: 'Modular Dungeon Kit', url: 'https://www.fab.com/listings/4cc9a46e-6870-4e44-8aeb-4ffb61e76b4c' }
       ]
@@ -1131,7 +1154,7 @@
     UnrealStudy_2210: 'Unreal Study (2022.10)'
   };
 
-  let curImages = [], curIdx = 0;
+  let curImages = [], curIdx = 0, curCaptions = null;
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbProject = document.getElementById('lbProject');
@@ -1156,6 +1179,7 @@
 
     curImages = slides;
     curIdx = 0;
+    curCaptions = proj.captions || null;
     lbProject.textContent = PROJECT_LABELS[projectName] || projectName;
 
     // Display credits if any
@@ -1222,6 +1246,19 @@
     lbCounter.textContent = `${curIdx + 1} / ${curImages.length}`;
     lbPrev.disabled = curIdx === 0;
     lbNext.disabled = curIdx === curImages.length - 1;
+
+    // 캡션 업데이트
+    const lbCaption = document.getElementById('lbCaption');
+    if (lbCaption) {
+      let captionText = '';
+      if (curCaptions && slide.type === 'image' && slide.src) {
+        // 파일명만 추출해서 매칭 (예: "Images/2026.03_MegicDesk/Zbrush01.png" → "Zbrush01")
+        const filename = slide.src.split('/').pop().replace(/\.(png|jpg|jpeg|gif|webp)$/i, '');
+        captionText = curCaptions[filename] || '';
+      }
+      lbCaption.textContent = captionText;
+    }
+
     lbStrip.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === curIdx));
     const activeThumb = lbStrip.querySelector('.lb-thumb.active');
     if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
