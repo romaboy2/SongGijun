@@ -1222,12 +1222,14 @@
       lbCredits.innerHTML = '';
     }
 
-    // Build thumbnail strip
+    // Build thumbnail strip with lazy loading
     lbStrip.innerHTML = slides.map((s, i) => {
-      if (s.type === 'video') {
-        return `<img class="lb-thumb${i === 0 ? ' active' : ''}" src="https://img.youtube.com/vi/${s.src}/hqdefault.jpg" data-i="${i}" alt="">`;
-      }
-      return `<img class="lb-thumb${i === 0 ? ' active' : ''}" src="${s.src}" data-i="${i}" alt="">`;
+      const thumbSrc = s.type === 'video'
+        ? `https://img.youtube.com/vi/${s.src}/hqdefault.jpg`
+        : s.src;
+      // 처음 6개만 즉시 로딩, 나머지는 lazy
+      const loading = i < 6 ? 'eager' : 'lazy';
+      return `<img class="lb-thumb${i === 0 ? ' active' : ''}" src="${thumbSrc}" data-i="${i}" alt="" loading="${loading}" decoding="async">`;
     }).join('');
     lbStrip.querySelectorAll('.lb-thumb').forEach(t =>
       t.addEventListener('click', () => goTo(+t.dataset.i))
@@ -1271,8 +1273,23 @@
       lbIframe.style.display = 'none';
       lbIframe.src = '';
       lbImgEl.style.display = 'block';
-      lbImgEl.src = slide.src;
       lbImgWrap.classList.remove('video-mode');
+
+      // 같은 이미지면 다시 로딩 안 함
+      if (lbImgEl.src !== slide.src && !lbImgEl.src.endsWith(slide.src)) {
+        lbImgEl.style.opacity = '0';
+        lbImgEl.src = slide.src;
+        lbImgEl.onload = () => { lbImgEl.style.opacity = '1'; };
+      }
+
+      // 다음/이전 이미지 미리 로딩 (preload)
+      [curIdx + 1, curIdx + 2, curIdx - 1].forEach(i => {
+        const next = curImages[i];
+        if (next && next.type === 'image') {
+          const preload = new Image();
+          preload.src = next.src;
+        }
+      });
     }
 
     lbCounter.textContent = `${curIdx + 1} / ${curImages.length}`;
