@@ -474,7 +474,7 @@
     max-height: 92vh;
     object-fit: contain;
     display: block;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.25s ease;
     transform-origin: center center;
     will-change: transform;
     user-select: none;
@@ -1275,11 +1275,23 @@
       lbImgEl.style.display = 'block';
       lbImgWrap.classList.remove('video-mode');
 
-      // 같은 이미지면 다시 로딩 안 함
-      if (lbImgEl.src !== slide.src && !lbImgEl.src.endsWith(slide.src)) {
+      // 이미지 로딩 처리 - 같은 이미지면 다시 로딩 안 함
+      const currentSrc = lbImgEl.src;
+      const isSameImage = currentSrc.endsWith(slide.src);
+
+      if (!isSameImage) {
+        // 새 이미지면 페이드 처리
         lbImgEl.style.opacity = '0';
-        lbImgEl.src = slide.src;
         lbImgEl.onload = () => { lbImgEl.style.opacity = '1'; };
+        lbImgEl.onerror = () => { lbImgEl.style.opacity = '1'; };
+        lbImgEl.src = slide.src;
+
+        // 안전장치: 이미지가 캐시되어 onload가 안 불릴 경우 대비
+        if (lbImgEl.complete && lbImgEl.naturalHeight !== 0) {
+          lbImgEl.style.opacity = '1';
+        }
+      } else {
+        lbImgEl.style.opacity = '1';
       }
 
       // 다음/이전 이미지 미리 로딩 (preload)
@@ -1552,15 +1564,27 @@
     bgHover.style.backgroundImage = `url('${subImages[idx2]}')`;
   })();
 
-  /* ── 비디오 순차 재생 ── */
+  /* ── 비디오 순차 재생 (랜덤 순서) ── */
   const VIDEOS = [
     'Videos/Medieval_Ani.mp4',
     'Videos/MegicDesk.mp4',
     'Videos/Sequence_Ani.mp4'
   ];
+
+  // 페이지 로드마다 영상 순서를 셔플 (Fisher-Yates)
+  for (let i = VIDEOS.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [VIDEOS[i], VIDEOS[j]] = [VIDEOS[j], VIDEOS[i]];
+  }
+
   let videoIdx = 0;
   const heroVideo = document.getElementById('heroVideo');
   const heroSource = document.getElementById('heroSource');
+
+  // 첫 번째 영상을 셔플된 순서의 첫 번째로 설정
+  heroSource.src = VIDEOS[0];
+  heroVideo.load();
+  heroVideo.play().catch(() => {});
 
   heroVideo.addEventListener('ended', () => {
     // 페이드 아웃
