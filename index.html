@@ -407,14 +407,14 @@
     margin-right: 0.4rem;
   }
 
-  /* Caption overlay on image (bottom center) */
+  /* Caption overlay on image (centered to image area) */
   .lb-caption-overlay {
-    position: fixed;
+    position: absolute;
     bottom: 1.5rem;
     left: 50%;
     transform: translateX(-50%) translateY(15px);
     width: auto;
-    max-width: min(900px, calc(100vw - 280px));
+    max-width: min(900px, calc(100% - 4rem));
     background: rgba(8, 8, 8, 0.92);
     border-left: 3px solid var(--gold);
     border-right: 3px solid var(--gold);
