@@ -156,6 +156,47 @@
     border: none;
     display: block;
   }
+  video.lb-video {
+    background: #000;
+    object-fit: contain;
+  }
+
+  /* Local video thumbnail in strip */
+  .lb-thumb-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s, border-color 0.2s;
+    border: 2px solid transparent;
+    overflow: hidden;
+    background: #000;
+  }
+  .lb-thumb-video.active { opacity: 1; border-color: var(--gold); }
+  .lb-thumb-video:hover { opacity: 0.85; }
+  .lb-thumb-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .lb-thumb-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--cream);
+    font-size: 14px;
+    background: rgba(8,8,8,0.6);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2px;
+    pointer-events: none;
+  }
 
   /* When showing video, expand the wrap to allow large video */
   .lb-img-wrap.video-mode {
@@ -656,6 +697,7 @@
         <div class="gallery-bg" style="background-image: url('Images/2026.03_MegicDesk/Scene08.png');"></div>
         <div class="gallery-bg-hover" style="background-image: url('Images/2026.03_MegicDesk/Scene03.png');"></div>
         <div class="gallery-overlay"></div>
+        <div class="play-icon">▶</div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Environment</span>
           <div class="gallery-name">Magic Desk</div>
@@ -670,6 +712,7 @@
         <div class="gallery-bg" style="background-image: url('Images/2025.11_Cannon/Shot02.png');"></div>
         <div class="gallery-bg-hover" style="background-image: url('Images/2025.11_Cannon/Shot04.png');"></div>
         <div class="gallery-overlay"></div>
+        <div class="play-icon">▶</div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Props</span>
           <div class="gallery-name">Cannon</div>
@@ -684,6 +727,7 @@
         <div class="gallery-bg" style="background-image: url('Images/2025.08_Wagon/Wagon01.png');"></div>
         <div class="gallery-bg-hover" style="background-image: url('Images/2025.08_Wagon/Wagon09.png');"></div>
         <div class="gallery-overlay"></div>
+        <div class="play-icon">▶</div>
         <div class="gallery-info">
           <span class="gallery-tag">3D · Vehicle</span>
           <div class="gallery-name">Wagon</div>
@@ -924,6 +968,7 @@
     <div class="lb-img-wrap">
       <img id="lbImg" src="" alt="">
       <iframe id="lbIframe" class="lb-video" style="display:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <video id="lbLocalVideo" class="lb-video" style="display:none;" controls playsinline></video>
     </div>
     <div class="lb-caption-overlay" id="lbCaption">
       <span class="lb-caption-label">● Workflow</span>
@@ -1022,6 +1067,7 @@
       ].map(n => `Images/2026.04_Anvil/${n}.png`)
     },
     Cannon: {
+      localVideo: 'Images/2025.11_Cannon/Cannon.mp4',
       images: [
         'Shot02','Shot01','Shot03','Shot04','Shot05','Shot06','Shot07',
         'Main02','Main03','Main04','Main05','Main06','Main07','Main08','Main09','Main10','Main11','Main12',
@@ -1033,6 +1079,7 @@
       ]
     },
     Wagon: {
+      localVideo: 'Images/2025.08_Wagon/Wagon.mp4',
       images: [
         ...[
           'Wagon01','Wagon02','Wagon03','Wagon04','Wagon05','Wagon06',
@@ -1057,6 +1104,7 @@
       ].map(n => `Images/2024.10_Corridor/${n}.png`)
     },
     MegicDesk: {
+      localVideo: 'Images/2026.03_MegicDesk/MegicDesk.mp4',
       images: [
         ...[
           'Scene01','Scene02','Scene03','Scene04','Scene05','Scene06','Scene07','Scene08','Scene09',
@@ -1205,8 +1253,9 @@
     const lbImgEl = document.getElementById('lbImg');
     const lbImgWrap = document.querySelector('.lb-img-wrap');
 
-    // Build slide list: video first (if present), then images
+    // Build slide list: local video first (if present), then youtube, then images
     const slides = [];
+    if (proj.localVideo) slides.push({ type: 'localVideo', src: proj.localVideo });
     if (proj.youtube) slides.push({ type: 'video', src: proj.youtube });
     if (proj.images) proj.images.forEach(src => slides.push({ type: 'image', src }));
 
@@ -1229,12 +1278,15 @@
 
     // Build thumbnail strip with lazy loading
     lbStrip.innerHTML = slides.map((s, i) => {
-      const thumbSrc = s.type === 'video'
-        ? `https://img.youtube.com/vi/${s.src}/hqdefault.jpg`
-        : s.src;
-      // 처음 6개만 즉시 로딩, 나머지는 lazy
       const loading = i < 6 ? 'eager' : 'lazy';
-      return `<img class="lb-thumb${i === 0 ? ' active' : ''}" src="${thumbSrc}" data-i="${i}" alt="" loading="${loading}" decoding="async">`;
+      const active = i === 0 ? ' active' : '';
+      if (s.type === 'video') {
+        return `<img class="lb-thumb${active}" src="https://img.youtube.com/vi/${s.src}/hqdefault.jpg" data-i="${i}" alt="" loading="${loading}" decoding="async">`;
+      }
+      if (s.type === 'localVideo') {
+        return `<div class="lb-thumb lb-thumb-video${active}" data-i="${i}"><video src="${s.src}#t=0.5" preload="metadata" muted playsinline></video><span class="lb-thumb-play">▶</span></div>`;
+      }
+      return `<img class="lb-thumb${active}" src="${s.src}" data-i="${i}" alt="" loading="${loading}" decoding="async">`;
     }).join('');
     lbStrip.querySelectorAll('.lb-thumb').forEach(t =>
       t.addEventListener('click', () => goTo(+t.dataset.i))
@@ -1254,6 +1306,8 @@
     document.body.style.overflow = '';
     const lbIframe = document.getElementById('lbIframe');
     if (lbIframe) lbIframe.src = '';
+    const lbLocalVideo = document.getElementById('lbLocalVideo');
+    if (lbLocalVideo) { lbLocalVideo.pause(); lbLocalVideo.src = ''; }
     const lbCaption = document.getElementById('lbCaption');
     if (lbCaption) lbCaption.classList.remove('visible');
   }
@@ -1267,16 +1321,33 @@
     const slide = curImages[curIdx];
     const lbIframe = document.getElementById('lbIframe');
     const lbImgEl = document.getElementById('lbImg');
+    const lbLocalVideo = document.getElementById('lbLocalVideo');
     const lbImgWrap = document.querySelector('.lb-img-wrap');
 
     if (slide.type === 'video') {
+      // YouTube iframe
       lbImgEl.style.display = 'none';
+      if (lbLocalVideo) { lbLocalVideo.pause(); lbLocalVideo.style.display = 'none'; lbLocalVideo.src = ''; }
       lbIframe.style.display = 'block';
       lbIframe.src = `https://www.youtube.com/embed/${slide.src}?autoplay=1&rel=0`;
       lbImgWrap.classList.add('video-mode');
-    } else {
+    } else if (slide.type === 'localVideo') {
+      // Local MP4 video
+      lbImgEl.style.display = 'none';
       lbIframe.style.display = 'none';
       lbIframe.src = '';
+      lbLocalVideo.style.display = 'block';
+      // 같은 영상이면 재로딩 안 함
+      if (!lbLocalVideo.src.endsWith(slide.src)) {
+        lbLocalVideo.src = slide.src;
+      }
+      lbLocalVideo.play().catch(() => {}); // 자동재생 시도 (실패해도 무시)
+      lbImgWrap.classList.add('video-mode');
+    } else {
+      // Image
+      lbIframe.style.display = 'none';
+      lbIframe.src = '';
+      if (lbLocalVideo) { lbLocalVideo.pause(); lbLocalVideo.style.display = 'none'; }
       lbImgEl.style.display = 'block';
       lbImgWrap.classList.remove('video-mode');
 
