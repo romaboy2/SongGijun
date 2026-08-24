@@ -678,7 +678,21 @@
   <div class="divider"></div>
   <div class="gallery-grid">
 
-    <div class="gallery-item reveal" data-project="Anvil">
+    <div class="gallery-item reveal" data-project="Shrine">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/2026.08_Shrine/Shrine05.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/2026.08_Shrine/Unlit04.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">3D · Environment</span>
+          <div class="gallery-name">Shrine</div>
+          <div class="gallery-count">9 images</div>
+          <div class="gallery-date">2026.08</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-item reveal" style="transition-delay:0.05s" data-project="Anvil">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/2026.04_Anvil/Anvil06.png');"></div>
         <div class="gallery-bg-hover" style="background-image: url('Images/2026.04_Anvil/Wire01.png');"></div>
@@ -692,7 +706,7 @@
       </div>
     </div>
 
-    <div class="gallery-item reveal" style="transition-delay:0.05s" data-project="MegicDesk">
+    <div class="gallery-item reveal" style="transition-delay:0.08s" data-project="MegicDesk">
       <div class="gallery-thumb">
         <div class="gallery-bg" style="background-image: url('Images/2026.03_MegicDesk/Scene08.png');"></div>
         <div class="gallery-bg-hover" style="background-image: url('Images/2026.03_MegicDesk/Scene03.png');"></div>
@@ -1055,6 +1069,14 @@
   const EMAIL = 'sgj0616@naver.com';
 
   const PROJECTS = {
+    Shrine: {
+      localVideo: 'Images/2026.08_Shrine/Shrine.mp4',
+      images: [
+        'Shrine01','Shrine02','Shrine03','Shrine04','Shrine05',
+        'Props',
+        'Shrine_Unlit','Unlit02','Unlit04'
+      ].map(n => `Images/2026.08_Shrine/${n}.png`)
+    },
     Anvil: {
       images: [
         'All_Shot',
@@ -1213,6 +1235,7 @@
   };
 
   const PROJECT_LABELS = {
+    Shrine: 'Shrine',
     Anvil: 'Anvil',
     Cannon: 'Cannon',
     Wagon: 'Wagon',
@@ -1641,7 +1664,8 @@
   const VIDEOS = [
     'Videos/Medieval_Ani.mp4',
     'Videos/MegicDesk.mp4',
-    'Videos/Sequence_Ani.mp4'
+    'Videos/Sequence_Ani.mp4',
+    'Videos/Shrine.mp4'
   ];
 
   // 페이지 로드마다 영상 순서를 셔플 (Fisher-Yates)
