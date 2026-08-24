@@ -1430,8 +1430,6 @@
   document.querySelectorAll('.gallery-item').forEach(item => {
     item.addEventListener('click', () => openLightbox(item.dataset.project));
   });
-  lbPrev.addEventListener('click', () => goTo(curIdx - 1));
-  lbNext.addEventListener('click', () => goTo(curIdx + 1));
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
 
   // Close when clicking outside the image (on background or main empty area)
@@ -1524,8 +1522,6 @@
     resetZoom();
     originalGoTo(i);
   };
-  lbPrev.removeEventListener('click', () => goTo(curIdx - 1));
-  lbNext.removeEventListener('click', () => goTo(curIdx + 1));
   lbPrev.onclick = () => goTo(curIdx - 1);
   lbNext.onclick = () => goTo(curIdx + 1);
 
