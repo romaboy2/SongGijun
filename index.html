@@ -304,6 +304,7 @@
     cursor: pointer;
     transition: all 0.3s;
     font-family: var(--mono);
+    vertical-align: middle;
   }
   .aboutme-email-text {
     font-size: 13px;
@@ -324,6 +325,24 @@
   }
   .aboutme-email-btn:hover .aboutme-email-action {
     color: var(--gold);
+  }
+  .aboutme-blog-btn {
+    display: inline-block;
+    margin-left: 0.6rem;
+    vertical-align: middle;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    text-decoration: none;
+    border: 1px solid var(--line-hover);
+    padding: 0.75rem 1.1rem;
+    transition: all 0.3s;
+  }
+  .aboutme-blog-btn:hover {
+    color: var(--gold);
+    border-color: var(--gold);
   }
 
   .aboutme-credit-note {
@@ -363,6 +382,33 @@
     transition: color 0.2s;
   }
   .credit-list a:hover { color: var(--gold); }
+
+  /* Section note (blog link etc.) */
+  .section-note {
+    font-size: 13px;
+    color: var(--cream-dim);
+    margin: -1rem 0 2.5rem 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    line-height: 1.6;
+  }
+  .section-note-link {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid var(--line-hover);
+    padding: 0.4rem 0.9rem;
+    transition: all 0.2s;
+  }
+  .section-note-link:hover {
+    border-color: var(--gold);
+    background: rgba(201, 162, 39, 0.08);
+  }
 
   /* University Works - 5 columns, more compact than Personal */
   .university-grid {
@@ -840,6 +886,10 @@
     <h2 class="section-title">University <em>Works</em></h2>
   </div>
   <div class="divider"></div>
+  <p class="section-note reveal">
+    캐릭터, 이펙트 등 그 외 대학 시절 작업물은 블로그에서 확인하실 수 있습니다.
+    <a href="https://blog.naver.com/sgj0616" target="_blank" rel="noopener" class="section-note-link">Blog ↗</a>
+  </p>
   <div class="gallery-grid university-grid">
 
     <div class="gallery-item reveal" data-project="House">
@@ -1017,6 +1067,7 @@
           <span class="aboutme-email-text">sgj0616@naver.com</span>
           <span class="aboutme-email-action">이메일 복사 ✉</span>
         </button>
+        <a href="https://blog.naver.com/sgj0616" target="_blank" rel="noopener" class="aboutme-blog-btn">Blog ↗</a>
       </div>
 
       <div class="aboutme-block">
