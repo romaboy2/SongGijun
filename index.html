@@ -900,9 +900,6 @@
     <h2 class="section-title">Assignment <em>Work</em></h2>
   </div>
   <div class="divider"></div>
-  <p class="section-note reveal">
-    주어진 조건에 맞춰 제작한 과제 형식의 작업입니다. 스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일.
-  </p>
   <div class="gallery-grid assignment-grid">
 
     <div class="gallery-item reveal" data-project="Shredder">
@@ -1074,7 +1071,7 @@
       <video id="lbLocalVideo" class="lb-video" style="display:none;" controls playsinline></video>
     </div>
     <div class="lb-caption-overlay" id="lbCaption">
-      <span class="lb-caption-label">● Workflow</span>
+      <span class="lb-caption-label" id="lbCaptionLabel">● Workflow</span>
       <span class="lb-caption-text" id="lbCaptionText"></span>
     </div>
     <button class="lb-btn lb-next" id="lbNext">→</button>
@@ -1312,7 +1309,19 @@
         'Shredder01','Shredder02','Shredder03','Shredder04',
         'Wire01','Wire02','Wire03','Wire04',
         'UV'
-      ].map(n => `Images/2026.10_Shredder/${n}.png`)
+      ].map(n => `Images/2026.10_Shredder/${n}.png`),
+      captionLabel: 'Brief',
+      captions: {
+        'Shredder01': '스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일',
+        'Shredder02': '스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일',
+        'Shredder03': '스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일',
+        'Shredder04': '스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일',
+        'Wire01': '스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일',
+        'Wire02': '스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일',
+        'Wire03': '스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일',
+        'Wire04': '스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일',
+        'UV': '스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일'
+      }
     },
     UniPillar: {
       images: ['Pillar01','Pillar02']
@@ -1358,7 +1367,7 @@
     Ruin: 'Ruin (2020.09)',
     Battlecrusier: 'Battlecrusier (2021.12)',
     Study2D: '2D Study (2021.12)',
-    Shredder: 'Shredder (2026.10)',
+    Shredder: 'Shredder',
     UniPillar: 'Pillar (2022.04)',
     Slaveship: 'Slaveship (2022.08)',
     FairyHouse: 'Fairy House (2023.07)',
@@ -1366,7 +1375,7 @@
     UnrealStudy_2210: 'Unreal Study (2022.10)'
   };
 
-  let curImages = [], curIdx = 0, curCaptions = null;
+  let curImages = [], curIdx = 0, curCaptions = null, curCaptionLabel = 'Workflow';
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbProject = document.getElementById('lbProject');
@@ -1393,6 +1402,7 @@
     curImages = slides;
     curIdx = 0;
     curCaptions = proj.captions || null;
+    curCaptionLabel = proj.captionLabel || 'Workflow';
     lbProject.textContent = PROJECT_LABELS[projectName] || projectName;
 
     // Display credits if any
@@ -1524,6 +1534,8 @@
       }
       if (captionText) {
         lbCaptionText.textContent = captionText;
+        const lbCaptionLabel = document.getElementById('lbCaptionLabel');
+        if (lbCaptionLabel) lbCaptionLabel.textContent = `● ${curCaptionLabel}`;
         lbCaption.classList.add('visible');
       } else {
         lbCaption.classList.remove('visible');
