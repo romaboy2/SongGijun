@@ -410,6 +410,18 @@
     background: rgba(201, 162, 39, 0.08);
   }
 
+  /* Assignment Work - 3 columns, single card stays readable */
+  .assignment-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .assignment-grid .gallery-item:nth-child(1) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  .assignment-grid .gallery-item:nth-child(1) .gallery-thumb { aspect-ratio: 4/3; }
+  .assignment-grid .gallery-item:nth-child(1) .gallery-name { font-size: 20px; }
+
   /* University Works - 5 columns, more compact than Personal */
   .university-grid {
     grid-template-columns: repeat(5, 1fr);
@@ -661,6 +673,7 @@
     #home { padding: 0 1.5rem; }
     .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     .university-grid { grid-template-columns: repeat(3, 1fr); }
+    .assignment-grid { grid-template-columns: repeat(2, 1fr); }
     .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
     .gallery-item:nth-child(1) .gallery-thumb { aspect-ratio: 16/9; }
     .aboutme-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -692,6 +705,7 @@
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#work">Personal</a></li>
+    <li><a href="#assignment">Assignment</a></li>
     <li><a href="#university">University</a></li>
     <li><a href="#aboutme">About</a></li>
   </ul>
@@ -880,9 +894,37 @@
   </div>
 </section>
 
-<section id="university">
+<section id="assignment">
   <div class="section-header reveal">
     <span class="section-num">02</span>
+    <h2 class="section-title">Assignment <em>Work</em></h2>
+  </div>
+  <div class="divider"></div>
+  <p class="section-note reveal">
+    주어진 조건에 맞춰 제작한 과제 형식의 작업입니다. 스타일라이즈드 / 과도한 디테일 배제 / 작업 기간 4일.
+  </p>
+  <div class="gallery-grid assignment-grid">
+
+    <div class="gallery-item reveal" data-project="Shredder">
+      <div class="gallery-thumb">
+        <div class="gallery-bg" style="background-image: url('Images/2026.10_Shredder/Shredder01.png');"></div>
+        <div class="gallery-bg-hover" style="background-image: url('Images/2026.10_Shredder/Wire01.png');"></div>
+        <div class="gallery-overlay"></div>
+        <div class="gallery-info">
+          <span class="gallery-tag">3D · Props · Stylized</span>
+          <div class="gallery-name">Shredder</div>
+          <div class="gallery-count">9 images</div>
+          <div class="gallery-date">2026.10</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="university">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
     <h2 class="section-title">University <em>Works</em></h2>
   </div>
   <div class="divider"></div>
@@ -1042,7 +1084,7 @@
 
 <section id="aboutme">
   <div class="section-header reveal">
-    <span class="section-num">03</span>
+    <span class="section-num">04</span>
     <h2 class="section-title">About</h2>
   </div>
   <div class="divider"></div>
@@ -1265,6 +1307,13 @@
       images: ['Ori01','Ori02','Ori03','Ori04']
         .map(n => `Images/University/2021.12_2DStudy/${n}.png`)
     },
+    Shredder: {
+      images: [
+        'Shredder01','Shredder02','Shredder03','Shredder04',
+        'Wire01','Wire02','Wire03','Wire04',
+        'UV'
+      ].map(n => `Images/2026.10_Shredder/${n}.png`)
+    },
     UniPillar: {
       images: ['Pillar01','Pillar02']
         .map(n => `Images/University/2022.04_Pillar/${n}.png`)
@@ -1309,6 +1358,7 @@
     Ruin: 'Ruin (2020.09)',
     Battlecrusier: 'Battlecrusier (2021.12)',
     Study2D: '2D Study (2021.12)',
+    Shredder: 'Shredder (2026.10)',
     UniPillar: 'Pillar (2022.04)',
     Slaveship: 'Slaveship (2022.08)',
     FairyHouse: 'Fairy House (2023.07)',
